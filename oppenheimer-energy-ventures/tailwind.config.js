@@ -11,6 +11,7 @@ module.exports = {
           DEFAULT: "#0a0a0a",
           muted: "#5a5a5a"
         },
+  secondary: "#f3f4f6",
         accent: "#1a9",
       },
     },
