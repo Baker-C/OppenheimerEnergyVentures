@@ -1,13 +1,20 @@
 import { NavLink } from 'react-router-dom';
 
 export default function Nav() {
-  const linkClass = ({ isActive }) => `px-3 py-2 text-sm ${isActive ? 'text-accent' : 'text-primary hover:text-accent'}`;
+  const linkClass = ({ isActive }) => [
+    'px-3 pt-2 pb-3 text-base sm:text-lg font-medium border-b-2 transition-colors',
+    isActive ? 'text-accent border-accent' : 'text-primary border-transparent hover:border-gray-300'
+  ].join(' ');
+  const handleClick = (e) => {
+    // Remove focus after click so outline doesn't linger post-navigation
+    e.currentTarget.blur();
+  };
   return (
-    <header className="sticky top-0 inset-x-0 bg-white shadow-top-sm z-20">
-      <div className="max-w-5xl mx-auto flex items-center justify-center px-4 py-3">
+    <header className="sticky top-0 inset-x-0 bg-white shadow-bottom-hard z-20">
+      <div className="max-w-5xl mx-auto flex items-center justify-center px-4 py-4">
         <nav className="flex items-center gap-3">
-          <NavLink to="/" className={linkClass} end>Home</NavLink>
-          <NavLink to="/information" className={linkClass}>Information</NavLink>
+          <NavLink to="/" className={linkClass} onClick={handleClick} end>Home</NavLink>
+          <NavLink to="/information" className={linkClass} onClick={handleClick}>Information</NavLink>
         </nav>
       </div>
     </header>

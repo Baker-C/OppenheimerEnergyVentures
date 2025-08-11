@@ -15,7 +15,7 @@ export default function HeroVideo({ src = '/video/hero.mp4', poster = '/video/En
       {/* Bottom overlay text */}
   <div className="absolute inset-x-0 bottom-8 sm:bottom-12 md:bottom-16">
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 py-6 sm:py-10 text-center">
-          <p className="text-black text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight" aria-label={"Nuclear doesn't have to be complicated."}>
+          <p className="text-black text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-pop" aria-label={"Nuclear doesn't have to be complicated."}>
             {(() => {
               const text = "Nuclear doesn't have to be complicated.";
               const italicWord = 'have';

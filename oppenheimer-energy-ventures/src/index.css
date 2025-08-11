@@ -31,6 +31,31 @@
     /* slightly darker and longer by ~1px */
     box-shadow: 0 -1px 3px 0 rgb(0 0 0 / 0.08);
   }
+    /* Harsher shadows */
+    .shadow-bottom-hard {
+      box-shadow: 0 4px 12px -2px rgb(0 0 0 / 0.12), 0 10px 20px -10px rgb(0 0 0 / 0.12);
+    }
+    .shadow-top-hard {
+      box-shadow: 0 -4px 12px -2px rgb(0 0 0 / 0.25), 0 -10px 20px -10px rgb(0 0 0 / 0.25);
+    }
+    /* Overlapping top shadow that casts over previous section */
+    .shadow-top-over {
+      position: relative;
+    }
+  .shadow-top-over::before {
+      content: "";
+      position: absolute;
+      top: -24px;
+      left: 0;
+      right: 0;
+      height: 24px;
+      pointer-events: none;
+      background: linear-gradient(to top,
+        rgb(0 0 0 / 0.12),
+        rgb(0 0 0 / 0.06) 35%,
+        transparent
+      );
+    }
   /* Delayed fade-in utility */
   @keyframes tw-fade-in {
     from { opacity: 0; }
@@ -49,5 +74,11 @@
     opacity: 0;
     display: inline-block;
   animation: letter-fade 700ms ease-out forwards;
+  }
+  /* Subtle outline/shadow to help hero text pop on mixed footage */
+  .text-pop {
+    text-shadow:
+      0 1px 2px rgb(0 0 0 / 0.25), /* soft drop */
+      0 0 1px rgb(255 255 255 / 0.6); /* faint edge lift */
   }
 }
