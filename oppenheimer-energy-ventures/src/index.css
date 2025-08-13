@@ -6,8 +6,13 @@
 /* Global base styles */
 @layer base {
   html { scroll-behavior: smooth; }
-  body { @apply bg-white text-primary; }
+  body { @apply bg-white text-charcoal font-sans; }
   a { @apply text-primary hover:text-accent focus:outline-none focus:ring-2 focus:ring-accent/40 rounded-sm; }
+}
+
+/* Heading font utility (Rubik) */
+@layer utilities {
+  .font-heading { font-family: theme('fontFamily.heading'); }
 }
 
 /* Utilities for the "thin line with a dot" motif */
@@ -56,6 +61,24 @@
         transparent
       );
     }
+    /* Overlapping bottom shadow that casts over following section */
+    .shadow-bottom-over {
+      position: relative;
+    }
+    .shadow-bottom-over::after {
+      content: "";
+      position: absolute;
+      bottom: -24px;
+      left: 0;
+      right: 0;
+      height: 24px;
+      pointer-events: none;
+      background: linear-gradient(to bottom,
+        rgb(0 0 0 / 0.12),
+        rgb(0 0 0 / 0.06) 35%,
+        transparent
+      );
+    }
   /* Delayed fade-in utility */
   @keyframes tw-fade-in {
     from { opacity: 0; }
@@ -75,10 +98,108 @@
     display: inline-block;
   animation: letter-fade 700ms ease-out forwards;
   }
+  /* Vertical-only shadow utility (no lateral spread perception) */
+  .shadow-y {
+    box-shadow: 0 8px 16px -12px rgb(0 0 0 / 0.25);
+  }
+  /* Force arrow cursor (suppress text I-beam) for nested text */
+  .cursor-default-all, .cursor-default-all * { cursor: default !important; }
   /* Subtle outline/shadow to help hero text pop on mixed footage */
   .text-pop {
     text-shadow:
       0 1px 2px rgb(0 0 0 / 0.25), /* soft drop */
       0 0 1px rgb(255 255 255 / 0.6); /* faint edge lift */
+  }
+
+  /* Gentle fade-up for content blocks, triggered when element becomes in-view */
+  /* Full edge-to-edge justification including last line */
+  .justify-edge {
+    text-align: justify;
+    text-align-last: justify; /* Most modern browsers */
+  }
+  .justify-edge:after {
+    /* Force last line justification workaround for some browsers by adding a full-width inline-block */
+    content: "";
+    display: inline-block;
+    width: 100%;
+  }
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .fade-up {
+    opacity: 0;
+    transform: translateY(8px);
+    will-change: opacity, transform;
+  }
+  .in-view.fade-up {
+    animation: fade-up 600ms ease-out forwards;
+    animation-delay: 120ms; /* slight default delay */
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .fade-up { opacity: 1; transform: none; }
+    .in-view.fade-up { animation: none; }
+  }
+
+  /* Animated line with traveling dot: scales then slides, revealing the line */
+  @keyframes dot-intro-scale {
+    0% { transform: translateY(-50%) scale(2); }
+    30% { transform: translateY(-50%) scale(0.5); }
+    45% { transform: translateY(-50%) scale(1); }
+    100% { transform: translateY(-50%) scale(1); }
+  }
+  @keyframes dot-slide {
+    0% { left: 0; }
+    100% { left: calc(100% - var(--dot-size, 6px)); }
+  }
+  @keyframes line-reveal {
+    0% { width: 0; }
+    100% { width: 100%; }
+  }
+  .line-dot-animate {
+    --dot-size: 6px;
+    position: relative;
+    /* overflow: hidden; */
+  }
+  /* Base dot at left and scaled up; animations apply when in-view */
+  .line-dot-animate::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: var(--dot-size);
+    height: var(--dot-size);
+    background: currentColor;
+    border-radius: 9999px;
+    transform: translateY(-50%) scale(2);
+  }
+  /* Line is drawn by ::before as it reveals */
+  .line-dot-animate::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    height: 1px;
+    width: 0;
+    background: currentColor;
+    transform: translateY(-50%);
+  }
+  /* Triggered when the element is in the viewport */
+  .in-view.line-dot-animate::after {
+    animation:
+      dot-intro-scale 400ms ease-out 500ms forwards,
+      dot-slide 900ms cubic-bezier(.22,.61,.36,1) 900ms forwards;
+  }
+  .in-view.line-dot-animate::before {
+    animation: line-reveal 900ms cubic-bezier(.22,.61,.36,1) 900ms forwards;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .line-dot-animate::after {
+      transform: translateY(-50%) scale(1);
+      left: calc(100% - var(--dot-size, 6px));
+    }
+    .line-dot-animate::before { width: 100%; }
+    .in-view.line-dot-animate::after,
+    .in-view.line-dot-animate::before { animation: none; }
   }
 }

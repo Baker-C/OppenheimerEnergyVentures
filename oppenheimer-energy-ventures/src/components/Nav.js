@@ -2,7 +2,7 @@ import { NavLink } from 'react-router-dom';
 
 export default function Nav() {
   const linkClass = ({ isActive }) => [
-    'px-3 pt-2 pb-3 text-base sm:text-lg font-medium border-b-2 transition-colors',
+    'px-4 pt-3 pb-4 text-lg sm:text-xl font-semibold tracking-wide border-b-2 transition-colors',
     isActive ? 'text-accent border-accent' : 'text-primary border-transparent hover:border-gray-300'
   ].join(' ');
   const handleClick = (e) => {

@@ -1,4 +1,6 @@
 [
-  { "name": "Your Name", "role": "Managing Partner", "bio": "Operator-investor focused on enduring energy infrastructure and frontier tech." },
-  { "name": "Teammate Two", "role": "Principal" }
+  { "name": "Charles Oppenheimer", "role": "Founder & CEO" },
+  { "name": "Duane Olcsvary", "role": "Executive Director of Project Operations" },
+  { "name": "Hunter Dare", "role": "Executive Sponsor for Finance" },
+  { "name": "Ryan Pickering", "role": "Chief Development Officer" }
 ]

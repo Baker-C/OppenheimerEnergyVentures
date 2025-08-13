@@ -1,11 +1,15 @@
-export default function Section({ title, children, className = '' }) {
+import LineDot from './LineDot';
+
+export default function Section({ title, children, className = '', animatedLine = false }) {
   return (
     <section className={`py-10 sm:py-12 ${className}`}>
       <div className="flex items-center gap-3 mb-6">
-        <h2 className="text-lg font-medium tracking-wide">{title}</h2>
-        <span className="flex-1 h-px bg-current relative line-dot" aria-hidden />
+        <h2 className="text-xl sm:text-2xl font-semibold tracking-wide font-heading">{title}</h2>
+        <LineDot width="fill" />
       </div>
-      {children}
+      <div className="space-y-8">
+        {children}
+      </div>
     </section>
   );
 }

@@ -6,13 +6,18 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ["Lekton", "ui-sans-serif", "system-ui", "-apple-system", "Segoe UI", "Roboto", "Noto Sans", "Ubuntu", "Cantarell", "Helvetica Neue", "Arial", "sans-serif"],
+        heading: ["Rubik", "ui-sans-serif", "system-ui", "-apple-system", "Segoe UI", "Roboto", "Noto Sans", "Ubuntu", "Cantarell", "Helvetica Neue", "Arial", "sans-serif"],
+      },
       colors: {
         primary: {
-          DEFAULT: "#0a0a0a",
-          muted: "#5a5a5a"
+          DEFAULT: "#1a1a1a", // deep charcoal
+          muted: "#4a4a4a"
         },
-  secondary: "#f3f4f6",
+        secondary: "#f3f4f6",
         accent: "#1a9",
+        charcoal: "#1a1a1a"
       },
     },
   },
