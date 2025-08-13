@@ -15,7 +15,8 @@ module.exports = {
           DEFAULT: "#1a1a1a", // deep charcoal
           muted: "#4a4a4a"
         },
-        secondary: "#f3f4f6",
+  // Updated secondary background color
+  secondary: "#EEEEEE",
         accent: "#1a9",
         charcoal: "#1a1a1a"
       },

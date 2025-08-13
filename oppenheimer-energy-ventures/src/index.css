@@ -43,6 +43,10 @@
     .shadow-top-hard {
       box-shadow: 0 -4px 12px -2px rgb(0 0 0 / 0.25), 0 -10px 20px -10px rgb(0 0 0 / 0.25);
     }
+    /* Medium top shadow between sm and hard */
+    .shadow-top-md {
+      box-shadow: 0 -3px 8px -2px rgb(0 0 0 / 0.16), 0 -6px 14px -8px rgb(0 0 0 / 0.16);
+    }
     /* Overlapping top shadow that casts over previous section */
     .shadow-top-over {
       position: relative;

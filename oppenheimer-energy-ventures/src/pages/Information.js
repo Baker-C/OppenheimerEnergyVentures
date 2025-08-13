@@ -9,28 +9,34 @@ import about from '../data/about.json';
 
 export default function Information() {
   return (
-    <main>
+    <main className="pb-40 sm:pb-48">
       <Container>
   <Section title="About" animatedLine className="mt-16">
           <div className="space-y-6 text-gray-800 text-lg sm:text-xl md:text-2xl leading-8 text-balance">
             {about.about.paragraphs.map((p, i) => (
-              <p key={i} >{p}</p>
+              <p key={i} className="fade-up" style={{ animationDelay: `${420 + i * 120}ms` }}>{p}</p>
             ))}
           </div>
         </Section>
   <Section title="Resources" animatedLine className="mt-16">
-          <p className="text-lg sm:text-xl md:text-2xl text-gray-600 mb-8">{materials.subtitle}</p>
+          <p className="text-lg sm:text-xl md:text-2xl text-gray-600 mb-8 fade-up" style={{ animationDelay: '420ms' }}>{materials.subtitle}</p>
           <div>
             {(materials.items || materials).map((m, i, arr) => (
-              <MaterialRow key={i} name={m.name} href={m.href} isLast={i === (arr.length - 1)} />
+              <div key={i} className="fade-up" style={{ animationDelay: `${480 + i * 120}ms` }}>
+                <MaterialRow name={m.name} href={m.href} isLast={i === (arr.length - 1)} />
+              </div>
             ))}
           </div>
         </Section>
   <Section title="Team" animatedLine className="mt-16">
-          <PeopleList people={team} />
+          <div className="fade-up" style={{ animationDelay: '420ms' }}>
+            <PeopleList people={team} />
+          </div>
         </Section>
   <Section title="Advisors" animatedLine className="mt-16">
-          <PeopleList people={advisors} />
+          <div className="fade-up" style={{ animationDelay: '420ms' }}>
+            <PeopleList people={advisors} />
+          </div>
         </Section>
       </Container>
     </main>
