@@ -8,14 +8,18 @@ const CustomCursor = () => {
     document.body.appendChild(cursor);
 
     const moveCursor = (e) => {
-      cursor.style.left = `${e.clientX}px`;
-      cursor.style.top = `${e.clientY}px`;
+      const x = e.touches ? e.touches[0].clientX : e.clientX;
+      const y = e.touches ? e.touches[0].clientY : e.clientY;
+      cursor.style.left = `${x}px`;
+      cursor.style.top = `${y}px`;
     };
 
     document.addEventListener('mousemove', moveCursor);
+    document.addEventListener('touchmove', moveCursor);
 
     return () => {
       document.removeEventListener('mousemove', moveCursor);
+      document.removeEventListener('touchmove', moveCursor);
       document.body.removeChild(cursor);
     };
   }, []);

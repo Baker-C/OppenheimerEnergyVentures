@@ -83,7 +83,7 @@ export default function HeroVideo({ src = '/video/Video_HD.mp4', poster = '/vide
   };
 
   return (
-    <div className="relative w-full overflow-hidden h-[520px] sm:h-[560px] md:h-[620px] lg:h-[700px] xl:h-[760px]">
+    <div className="relative w-full overflow-hidden h-[350px] xsm:h-[480px] sm:h-[560px] md:h-[620px] lg:h-[700px] xl:h-[760px]">
       <div className="w-full h-full flex items-center justify-center">
         {finished ? (
           <img
@@ -109,7 +109,7 @@ export default function HeroVideo({ src = '/video/Video_HD.mp4', poster = '/vide
           </video>
         )}
       </div>
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 pb-12 sm:pb-16">
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 pb-2 xsm:pb-4 sm:pb-8 lg:pb-12">
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 text-center">
           <HeroTitle
             reveal={revealTitle}
