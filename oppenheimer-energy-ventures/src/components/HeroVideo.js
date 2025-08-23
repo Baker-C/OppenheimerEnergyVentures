@@ -66,7 +66,6 @@ export default function HeroVideo({ src = '/video/Mercury-Logo.mp4', poster = '/
     };
   }, [source]);
 
-  // (Text animation moved outside; keep timing hook if parent wants to listen in future)
   const handleError = () => {
     // Fallback to an alternate, smaller video if the primary fails (e.g., OneDrive Range issue)
     if (source !== '/video/Mercury-Logo.mp4') {
@@ -114,9 +113,9 @@ export default function HeroVideo({ src = '/video/Mercury-Logo.mp4', poster = '/
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 text-center">
           <HeroTitle
             reveal={revealTitle}
-            text="Nuclear doesn't have to be complicated."
+            text="OPPENHEIMER ENERGY"
             italicWord=""
-            pauses={{ baseDelay: 0, step: 0.03, wordPauseMultiplier: 3, pauseAfterWord: { Nuclear: 1.0 } }}
+            pauses={{ baseDelay: 0, step: 0.03, wordPauseMultiplier: 3, pauseAfterWord: { } }}
           />
         </div>
       </div>

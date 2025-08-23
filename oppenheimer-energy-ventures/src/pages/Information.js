@@ -11,14 +11,14 @@ export default function Information() {
   return (
     <main className="pb-40 sm:pb-48">
       <Container>
-  <Section title="About" animatedLine className="mt-16">
+  <Section title="About Us" animatedLine className="mt-16">
           <div className="space-y-6 text-gray-800 text-lg sm:text-xl md:text-2xl leading-8 text-balance">
             {about.about.paragraphs.map((p, i) => (
               <p key={i} className="fade-up" style={{ animationDelay: `${420 + i * 120}ms` }}>{p}</p>
             ))}
           </div>
         </Section>
-  <Section title="Resources" animatedLine className="mt-16">
+  {/* <Section title="Resources" animatedLine className="mt-16">
           <p className="text-lg sm:text-xl md:text-2xl text-gray-600 mb-8 fade-up" style={{ animationDelay: '420ms' }}>{materials.subtitle}</p>
           <div>
             {(materials.items || materials).map((m, i, arr) => (
@@ -27,13 +27,13 @@ export default function Information() {
               </div>
             ))}
           </div>
-        </Section>
+        </Section> */}
   <Section title="Team" animatedLine className="mt-16">
           <div className="fade-up" style={{ animationDelay: '420ms' }}>
             <PeopleList people={team} />
           </div>
         </Section>
-  <Section title="Advisors" animatedLine className="mt-16">
+  <Section title="Advisors & Investors" animatedLine className="mt-16">
           <div className="fade-up" style={{ animationDelay: '420ms' }}>
             <PeopleList people={advisors} />
           </div>

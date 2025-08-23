@@ -52,7 +52,7 @@ export default function HeroTitle({
 
   return (
     <p
-      className={`text-black text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-pop font-heading ${className}`}
+      className={`text-black text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light tracking-tight text-pop font-heading ${className}`}
       aria-label={text}
     >
       {spans}

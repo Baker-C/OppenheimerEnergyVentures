@@ -1,6 +1,6 @@
 [
-  { "name": "Charles Oppenheimer", "role": "Founder & CEO" },
-  { "name": "Duane Olcsvary", "role": "Executive Director of Project Operations" },
-  { "name": "Hunter Dare", "role": "Executive Sponsor for Finance" },
-  { "name": "Ryan Pickering", "role": "Chief Development Officer" }
+  { "name": "Charles Oppenheimer", "role": "Founder" },
+  { "name": "Duane Olcsvary", "role": "Nuclear" },
+  { "name": "Hunter Dare", "role": "Finance" },
+  { "name": "Ryan Pickering", "role": "Development" }
 ]

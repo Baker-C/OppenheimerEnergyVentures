@@ -4,6 +4,7 @@ import Nav from './components/Nav';
 import Home from './pages/Home';
 import Information from './pages/Information';
 import Footer from './components/Footer';
+import CustomCursor from './components/CustomCursor';
 
 import { useEffect } from 'react';
 
@@ -41,7 +42,8 @@ function App() {
   return (
     <BrowserRouter>
       <ObserverWrapper>
-  <div className="min-h-screen bg-white text-primary flex flex-col cursor-default-all">
+        <CustomCursor />
+        <div className="min-h-screen bg-white text-primary flex flex-col cursor-none">
           <Nav />
           <div className="flex-1">
             <Routes>

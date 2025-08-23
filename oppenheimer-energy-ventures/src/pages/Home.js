@@ -85,13 +85,7 @@ export default function Home() {
       </div>
         <div className="w-full bg-white shadow-top-over relative z-10">
           <div className="max-w-[1200px] mx-auto px-4 sm:px-6 pt-20 sm:pt-24 pb-20 sm:pb-28">
-            <div className="space-y-14 sm:space-y-18">
-              <p className="fade-up text-center text-lg sm:text-xl md:text-2xl leading-8 text-charcoal [animation-delay:420ms]">
-                Oppenheimer Energy Ventures
-              </p>
-              <div className="flex items-center justify-center">
-                <LineDot width="64px" />
-              </div>
+            <div className="space-y-14 sm:space-y-18 px-6 lg:px-0">
               {home.intro.quote && (
                 <div className="space-y-5">
                   <p className="fade-up [animation-delay:420ms] text-center italic text-gray-600 text-lg sm:text-xl md:text-2xl max-w-4xl mx-auto">
