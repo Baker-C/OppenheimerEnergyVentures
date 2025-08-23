@@ -9,7 +9,7 @@ export function hasHeroVideoPlayed() {
   return HERO_VIDEO_PLAYED;
 }
 
-export default function HeroVideo({ src = '/video/Mercury-Logo.mp4', poster = '/video/Ending-Metallic-Dot.png', onFirstPlayStart, revealTitle=false }) {
+export default function HeroVideo({ src = '/video/Video_HD.mp4', poster = '/video/Logo_HD.png', onFirstPlayStart, revealTitle=false }) {
   const videoRef = useRef(null);
   const [source, setSource] = useState(src);
   const [showText, setShowText] = useState(false);
@@ -68,8 +68,8 @@ export default function HeroVideo({ src = '/video/Mercury-Logo.mp4', poster = '/
 
   const handleError = () => {
     // Fallback to an alternate, smaller video if the primary fails (e.g., OneDrive Range issue)
-    if (source !== '/video/Mercury-Logo.mp4') {
-      setSource('/video/Mercury-Logo.mp4');
+    if (source !== '/video/Video_HD.mp4') {
+      setSource('/video/Video.mp4');
     }
   };
 
@@ -87,8 +87,8 @@ export default function HeroVideo({ src = '/video/Mercury-Logo.mp4', poster = '/
       <div className="w-full h-full flex items-center justify-center">
         {finished ? (
           <img
-            src="/video/Ending-Metallic-Dot.png"
-            alt="Ending metallic dot"
+            src="/video/Logo_HD.png"
+            alt="Ending metallic logo"
             className="h-full w-auto object-cover pointer-events-none select-none"
             draggable={false}
           />

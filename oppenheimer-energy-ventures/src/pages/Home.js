@@ -3,6 +3,11 @@ import HeroVideo, { hasHeroVideoPlayed } from '../components/HeroVideo';
 import LineDot from '../components/LineDot';
 import home from '../data/home.json';
 
+const DARK_COLOR = '#333333';
+const LIGHT_COLOR = '#fbfdfa';
+const DARK_RGB = [0x33, 0x33, 0x33];
+const LIGHT_RGB = [251, 253, 250];
+
 export default function Home() {
   const [revealHeroTitle, setRevealHeroTitle] = useState(false);
   const timerRef = useRef(null);
@@ -14,11 +19,11 @@ export default function Home() {
   useEffect(() => {
     if (hasHeroVideoPlayed()) {
       setRevealHeroTitle(true);
-      if (bgRef.current) bgRef.current.style.backgroundColor = '#EEEEEE';
+      if (bgRef.current) bgRef.current.style.backgroundColor = LIGHT_COLOR;
     } else {
       // Fallback in case autoplay is blocked: show text after 12s regardless.
       timerRef.current = setTimeout(() => setRevealHeroTitle(true), 12000);
-      if (bgRef.current) bgRef.current.style.backgroundColor = '#333333';
+      if (bgRef.current) bgRef.current.style.backgroundColor = DARK_COLOR;
     }
     return () => {
       if (timerRef.current) clearTimeout(timerRef.current);
@@ -34,7 +39,7 @@ export default function Home() {
     // Respect reduced motion: jump to final state
     const prefersReduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (prefersReduce) {
-      if (bgRef.current) bgRef.current.style.backgroundColor = '#EEEEEE';
+      if (bgRef.current) bgRef.current.style.backgroundColor = LIGHT_COLOR;
       setRevealHeroTitle(true);
       setFinished(true);
       setPlaying(false);
@@ -53,19 +58,17 @@ export default function Home() {
     const lightLockStart = total - 2000; // 7500ms
     const lerpDuration = lightLockStart - holdDark; // 5000ms
     const start = Date.now();
-    const dark = [0x33, 0x33, 0x33];
-    const light = [0xEE, 0xEE, 0xEE];
     let frame;
     const step = () => {
       const elapsed = Date.now() - start;
       if (elapsed < holdDark) {
-        elem.style.backgroundColor = '#333333';
+        elem.style.backgroundColor = DARK_COLOR;
       } else if (elapsed < lightLockStart) {
         const t = (elapsed - holdDark) / lerpDuration; // 0..1
-        const c = dark.map((d, i) => Math.round(d + (light[i] - d) * t));
+        const c = DARK_RGB.map((d, i) => Math.round(d + (LIGHT_RGB[i] - d) * t));
         elem.style.backgroundColor = `rgb(${c[0]},${c[1]},${c[2]})`;
       } else {
-        elem.style.backgroundColor = '#EEEEEE';
+        elem.style.backgroundColor = LIGHT_COLOR;
         setFinished(true); // stop further animation for bg
         return;
       }

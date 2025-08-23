@@ -207,3 +207,16 @@
     .in-view.line-dot-animate::before { animation: none; }
   }
 }
+
+
+/* CustomCursor.css */
+.custom-cursor {
+  position: fixed;
+  width: 8px;
+  height: 8px;
+  background-color: black;
+  border-radius: 50%;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+}
