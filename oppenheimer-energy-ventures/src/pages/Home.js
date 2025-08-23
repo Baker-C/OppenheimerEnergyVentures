@@ -21,8 +21,8 @@ export default function Home() {
       setRevealHeroTitle(true);
       if (bgRef.current) bgRef.current.style.backgroundColor = LIGHT_COLOR;
     } else {
-      // Fallback in case autoplay is blocked: show text after 12s regardless.
-      timerRef.current = setTimeout(() => setRevealHeroTitle(true), 12000);
+      // Fallback in case autoplay is blocked: show text after 1s regardless.
+      timerRef.current = setTimeout(() => setRevealHeroTitle(true), 1000);
       if (bgRef.current) bgRef.current.style.backgroundColor = DARK_COLOR;
     }
     return () => {
@@ -54,8 +54,8 @@ export default function Home() {
     if (!playing || finished || !bgRef.current) return;
     const elem = bgRef.current;
     const total = 9500; // ms (assumed)
-    const holdDark = 2500; // ms
-    const lightLockStart = total - 2000; // 7500ms
+    const holdDark = 3500; // ms
+    const lightLockStart = total - 1000; // 8500ms
     const lerpDuration = lightLockStart - holdDark; // 5000ms
     const start = Date.now();
     let frame;
