@@ -109,7 +109,7 @@ export default function HeroVideo({ src = '/video/Video_HD.mp4', poster = '/vide
           </video>
         )}
       </div>
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 pb-2 xsm:pb-4 sm:pb-8 lg:pb-12">
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 pb-4 xsm:pb-8 sm:pb-8 lg:pb-10 xl:pb-12">
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 text-center">
           <HeroTitle
             reveal={revealTitle}
