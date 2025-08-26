@@ -101,8 +101,8 @@ export default function Home() {
                   )}
                 </div>
               )}
-              <div className="flex items-center justify-center">
-                <LineDot width="64px" />
+              <div className="flex items-center justify-start w-full">
+                <LineDot width="100%" />
               </div>
               {home.intro.copy && home.intro.copy.map((line, idx) => (
                 <p
