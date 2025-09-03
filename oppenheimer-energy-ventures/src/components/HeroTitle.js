@@ -1,54 +1,57 @@
-import React from 'react';
 import home from '../data/home.json';
 
 // Animated per-letter hero title
-export default function HeroTitle({
-  reveal = false,
-  className = ''
-}) {
-  if (!reveal) return null;
-
+export default function HeroTitle() {
+  // assume home.title is [['O','P','P',...], ['E','N','E','R','G','Y']]
   const title = home.title;
-  const letterDelay = 0.065;
-  const specialLetters = ['O', 'P', 'G', 'Y', 'R']; // List of letters that need balanced spacing
-  const spans = title.map((word, wordIndex) => {
-    const previousWordLength = title[wordIndex - 1]?.length || 0;
-    const wordDelay = wordIndex * previousWordLength * 0.1; // Delay based on previous word length
+  const baseDelay = 0.065;
+  const specialLetters = ['O', 'P', 'G', 'Y', 'R'];
 
-    return (
-      <span key={wordIndex} className="whitespace-nowrap">
-        {word.map((letter, letterIndex) => (
-          <span
-            key={letterIndex}
-            className={`letter-fade inline-block ${
-              letterIndex < word.length - 1
-                ? specialLetters.includes(letter.toUpperCase())
-                  ? 'mr-1 sm:mr-3 md:mr-4 lg:mr-5 xl:mr-6'
-                  : 'mr-2 sm:mr-4 md:mr-5 lg:mr-6 xl:mr-7'
-                : ''
-            }`}
-            style={{ animationDelay: `${wordDelay + letterIndex * letterDelay}s` }}
-          >
-            <img
-              src={`/vectors/${letter.toUpperCase()}.png`}
-              alt={letter}
-              className="inline-block h-4 xsm:h-6 sm:h-7 md:h-9 lg:h-10 xl:h-12"
-            />
-          </span>
-        ))}
-      </span>
-    );
-  });
+  const spans = title.map((word, wordIndex) => (
+    <span key={wordIndex} className="whitespace-nowrap">
+      {word.map((letter, letterIndex) => (
+        <span
+          key={letterIndex}
+          className={`letter-fade inline-block ${
+            letterIndex < word.length - 1
+              ? specialLetters.includes(letter.toUpperCase())
+                ? 'mr-0.5 xsm:mr-1.5 sm:mr-2 md:mr-3 lg:mr-4 xl:mr-5'
+                : 'mr-1 xsm:mr-2 sm:mr-3 md:mr-4 lg:mr-6 xl:mr-7'
+              : ''
+          }`}
+          style={{
+            animationDelay: `${
+              (wordIndex * word.length * .14) + (letterIndex * baseDelay)
+            }s`,
+          }}
+        >
+          <img
+            src={`/vectors/${letter.toUpperCase()}.png`}
+            alt={letter}
+            className="inline-block 
+              h-4
+              xsm:h-6
+              sm:h-8
+              md:h-10
+              lg:h-12
+              xl:h-16"
+          />
+        </span>
+      ))}
+    </span>
+  ));
 
   return (
-    <h1
-      className={`tracking-tight text-pop flex flex-wrap gap-x-6 gap-y-2 sm:gap-x-8 sm:gap-y-4 md:gap-x-12 md:gap-y-6 lg:gap-x-16 lg:gap-y-8 xl:gap-x-20 justify-center items-center text-center ${className}`}
+    <div
+      className={`tracking-tight text-pop flex whitespace-nowrap justify-center items-center text-center
+        gap-x-4
+        xsm:gap-x-8
+        sm:gap-x-10
+        md:gap-x-12
+        lg:gap-x-14
+        xl:gap-x-20`}
     >
-      {spans.map((span, index) => (
-        <React.Fragment key={index}>
-          {span}
-        </React.Fragment>
-      ))}
-    </h1>
+      {spans}
+    </div>
   );
 }

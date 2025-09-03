@@ -8,6 +8,8 @@ module.exports = {
     extend: {
       screens: {
         xsm: '480px',
+        md: '820px',
+        lg: '1080px',
       },
       fontFamily: {
         sans: ["Lekton", "ui-sans-serif", "system-ui", "-apple-system", "Segoe UI", "Roboto", "Noto Sans", "Ubuntu", "Cantarell", "Helvetica Neue", "Arial", "sans-serif"],

@@ -1,33 +1,46 @@
-import { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../index.css';
 
 const CustomCursor = () => {
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [clicked, setClicked] = useState(false);
+
   useEffect(() => {
     const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
     if (isMobile) return;
-    
-    const cursor = document.createElement('div');
-    cursor.classList.add('custom-cursor');
-    document.body.appendChild(cursor);
 
-    const moveCursor = (e) => {
-      const x = e.touches ? e.touches[0].clientX : e.clientX;
-      const y = e.touches ? e.touches[0].clientY : e.clientY;
-      cursor.style.left = `${x}px`;
-      cursor.style.top = `${y}px`;
+    const handleMouseMove = (e) => {
+      setPosition({ x: e.clientX, y: e.clientY });
     };
 
-    document.addEventListener('mousemove', moveCursor);
-    document.addEventListener('touchmove', moveCursor);
+    const handleMouseDown = () => {
+      setClicked(true);
+    };
+
+    const handleMouseUp = () => {
+      setClicked(false);
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mousedown', handleMouseDown);
+    window.addEventListener('mouseup', handleMouseUp);
 
     return () => {
-      document.removeEventListener('mousemove', moveCursor);
-      document.removeEventListener('touchmove', moveCursor);
-      document.body.removeChild(cursor);
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('mousedown', handleMouseDown);
+      window.removeEventListener('mouseup', handleMouseUp);
     };
   }, []);
 
-  return null;
+  return (
+    <div
+      className={`custom-cursor ${clicked ? 'clicked' : ''}`}
+      style={{
+        left: `${position.x}px`,
+        top: `${position.y}px`,
+      }}
+    />
+  );
 };
 
 export default CustomCursor;

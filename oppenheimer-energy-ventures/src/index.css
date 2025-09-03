@@ -148,8 +148,11 @@
   /* Animated line with traveling dot: scales then slides, revealing the line */
   @keyframes dot-intro-scale {
     0% { transform: translateY(-50%) scale(2); }
-    30% { transform: translateY(-50%) scale(0.5); }
-    45% { transform: translateY(-50%) scale(1); }
+    35% { transform: translateY(-50%) scale(1.6); }
+    55% { transform: translateY(-50%) scale(0.5); }
+    65% { transform: translateY(-50%) scale(1.4); }
+    80% { transform: translateY(-50%) scale(0.9); }
+    95% { transform: translateY(-50%) scale(1.2); }
     100% { transform: translateY(-50%) scale(1); }
   }
   @keyframes dot-slide {
@@ -161,7 +164,7 @@
     100% { width: 100%; }
   }
   .line-dot-animate {
-    --dot-size: 6px;
+    --dot-size: 10px;
     position: relative;
     /* overflow: hidden; */
   }
@@ -191,11 +194,11 @@
   /* Triggered when the element is in the viewport */
   .in-view.line-dot-animate::after {
     animation:
-      dot-intro-scale 400ms ease-out 500ms forwards,
-      dot-slide 900ms cubic-bezier(.22,.61,.36,1) 900ms forwards;
+      dot-intro-scale 600ms ease-out 10ms forwards,
+      dot-slide 900ms cubic-bezier(.22,.61,.36,1) 700ms forwards;
   }
   .in-view.line-dot-animate::before {
-    animation: line-reveal 900ms cubic-bezier(.22,.61,.36,1) 900ms forwards;
+    animation: line-reveal 900ms cubic-bezier(.22,.61,.36,1) 700ms forwards;
   }
   @media (prefers-reduced-motion: reduce) {
     .line-dot-animate::after {
@@ -206,17 +209,97 @@
     .in-view.line-dot-animate::after,
     .in-view.line-dot-animate::before { animation: none; }
   }
+
+  /* Center-starting line-dot: two dots shoot out left and right */
+.line-dot-center-animate {
+  --dot-size: 10px;
+  position: relative;
+  height: 6px;
+}
+.line-dot-center-animate i {
+  display: block;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 0;
+  height: 1px;
+  background: currentColor;
+}
+.line-dot-center-animate i::before,
+.line-dot-center-animate i::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: var(--dot-size);
+  height: var(--dot-size);
+  background: currentColor;
+  border-radius: 9999px;
+  transform: translateY(-50%) scale(0.8);
+}
+/* left dot */
+.line-dot-center-animate i::before {
+  left: calc(50% - var(--dot-size) / 2);
+}
+/* right dot */
+.line-dot-center-animate i::after {
+  left: calc(50% - var(--dot-size) / 2);
 }
 
+/* animations: lines expand left and right, dots shoot out */
+@keyframes center-line-expand-left {
+  0% { width: 0; left: 50%; }
+  100% { width: 50%; left: 0; }
+}
+@keyframes center-line-expand-right {
+  0% { width: 0; left: 50%; }
+  100% { width: 50%; left: 50%; }
+}
+@keyframes center-dot-shoot-left {
+  0% { transform: translateY(-50%) translateX(0) scale(0.8); }
+  100% { transform: translateY(-50%) translateX(-100%) scale(1); }
+}
+@keyframes center-dot-shoot-right {
+  0% { transform: translateY(-50%) translateX(0) scale(0.8); }
+  100% { transform: translateY(-50%) translateX(100%) scale(1); }
+}
+
+/* in-view trigger to run animations similar timing to LineDot */
+.in-view.line-dot-center-animate i {
+  animation: center-line-expand-left 900ms cubic-bezier(.22,.61,.36,1) 300ms forwards,
+            center-line-expand-right 900ms cubic-bezier(.22,.61,.36,1) 300ms forwards;
+}
+.in-view.line-dot-center-animate i::before {
+  animation: center-dot-shoot-left 900ms cubic-bezier(.22,.61,.36,1) 300ms forwards;
+}
+.in-view.line-dot-center-animate i::after {
+  animation: center-dot-shoot-right 900ms cubic-bezier(.22,.61,.36,1) 300ms forwards;
+}
+@media (prefers-reduced-motion: reduce) {
+  .in-view.line-dot-center-animate i,
+  .in-view.line-dot-center-animate i::before,
+  .in-view.line-dot-center-animate i::after {
+    animation: none;
+    width: 100%;
+    left: 0;
+    transform: translateY(-50%) translateX(0) scale(1);
+  }
+}
+}
 
 /* CustomCursor.css */
 .custom-cursor {
   position: fixed;
-  width: 8px;
-  height: 8px;
-  background-color: black;
+  width: 11px;
+  height: 11px;
+  background-color: rgba(0, 0, 0, 0.8);
   border-radius: 50%;
   pointer-events: none;
   transform: translate(-50%, -50%);
   z-index: 9999;
+  transition: transform 0.1s ease-in-out; /* Changed from transform to transition */
+}
+
+.custom-cursor.clicked {
+  transform: translate(-50%, -50%) scale(.7); /* Scale effect remains */
 }
