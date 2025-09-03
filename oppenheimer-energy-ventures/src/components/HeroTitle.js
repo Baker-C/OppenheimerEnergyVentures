@@ -43,7 +43,7 @@ export default function HeroTitle() {
 
   return (
     <div
-      className={`tracking-tight text-pop flex whitespace-nowrap justify-center items-center text-center
+      className={`tracking-tight text-pop flex whitespace-nowrap justify-center items-center
         gap-x-4
         xsm:gap-x-8
         sm:gap-x-10

@@ -9,9 +9,9 @@ import about from '../data/about.json';
 
 export default function Information() {
   return (
-    <main className="pb-40 sm:pb-48">
+    <main>
       <Container>
-  <Section title="About Us" animatedLine className="mt-16">
+        <Section title="About Us" animatedLine className="mt-16">
           <div className="space-y-6 text-gray-800 text-lg sm:text-xl md:text-2xl leading-8 text-balance">
             {about.about.paragraphs.map((p, i) => (
               <p key={i} className="fade-up" style={{ animationDelay: `${420 + i * 120}ms` }}>{p}</p>
@@ -28,12 +28,12 @@ export default function Information() {
             ))}
           </div>
         </Section> */}
-  <Section title="Team" animatedLine className="mt-16">
+        <Section title="Team" animatedLine className="mt-16">
           <div className="fade-up" style={{ animationDelay: '420ms' }}>
             <PeopleList people={team} />
           </div>
         </Section>
-  <Section title="Advisors & Investors" animatedLine className="mt-16">
+        <Section title="Advisors & Investors" animatedLine className="mt-16">
           <div className="fade-up" style={{ animationDelay: '420ms' }}>
             <PeopleList people={advisors} />
           </div>
