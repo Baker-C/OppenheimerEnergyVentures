@@ -150,7 +150,7 @@ export default function Home() {
             <HeroTitle />
           </div>
           <div className="max-w-[1200px] mx-auto px-4">
-            <div ref={contentRef} className="space-y-14 sm:space-y-18 px-6 lg:px-0">
+            <div ref={contentRef} className="space-y-16 sm:space-y-18 px-6 lg:px-0">
               {home.intro.quote && (
                 <div className="space-y-5">
                   <p data-copy-idx={-2} className={`fade-up text-center italic text-gray-600 text-lg sm:text-xl md:text-2xl max-w-4xl mx-auto`} style={{ animationDelay: `${(visibleCopyAtLoad[-2] ? 1200 : 0)}ms` }}>
@@ -163,7 +163,7 @@ export default function Home() {
                   )}
                 </div>
               )}
-              <div className="min-h-[70px] flex items-center justify-center">
+              <div className="min-h-[40px] flex items-center justify-center">
                 {showLineDot && (
                   <div className={`flex items-center justify-center w-full`}>
                     {showLineDot && <LineDot width="600px" />}
@@ -174,7 +174,7 @@ export default function Home() {
                  <p
                    key={idx}
                    data-copy-idx={idx}
-                   className={`fade-up justify-edge text-lg sm:text-xl md:text-2xl leading-8 text-charcoal`}
+                   className={`fade-up justify-edge text-lg sm:text-xl md:text-2xl leading-8 text-charcoal pt-4`}
                    style={{ animationDelay: `${(visibleCopyAtLoad[idx] ? 2900 : 300) + idx * 180}ms` }}
                  >
                    {line}

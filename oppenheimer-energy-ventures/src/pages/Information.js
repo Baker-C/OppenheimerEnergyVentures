@@ -11,7 +11,7 @@ export default function Information() {
   return (
     <main>
       <Container>
-        <Section title="About Us" animatedLine className="mt-16">
+        <Section title="About Us" animatedLine className="mt-10">
           <div className="space-y-6 text-gray-800 text-lg sm:text-xl md:text-2xl leading-8 text-balance">
             {about.about.paragraphs.map((p, i) => (
               <p key={i} className="fade-up" style={{ animationDelay: `${420 + i * 120}ms` }}>{p}</p>

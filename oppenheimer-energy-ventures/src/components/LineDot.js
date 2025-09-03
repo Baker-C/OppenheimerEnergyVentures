@@ -13,9 +13,28 @@ export default function LineDot({ width = '64px', className = '', ...props }) {
   const ref = useRef(null);
   useEffect(() => {
     const el = ref.current;
-    if (!el) return;
-    // If the element is mounted after a delay, ensure the animation runs by adding `in-view`.
-    // Small timeout lets the browser register layout before starting the animation.
+    if (!el || typeof window === 'undefined') return;
+
+    // If the browser supports IntersectionObserver, start the animation only when
+    // the element actually enters the viewport. Disconnect after first intersection
+    // so the animation only plays once.
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver(
+        (entries, obs) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              el.classList.add('in-view');
+              obs.disconnect();
+            }
+          });
+        },
+        { threshold: 0.1 }
+      );
+      observer.observe(el);
+      return () => observer.disconnect();
+    }
+
+    // Fallback for older browsers: keep the small timeout behavior.
     const t = setTimeout(() => el.classList.add('in-view'), 10);
     return () => clearTimeout(t);
   }, []);

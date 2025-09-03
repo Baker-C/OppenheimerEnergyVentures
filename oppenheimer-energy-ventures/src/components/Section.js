@@ -1,6 +1,6 @@
 import LineDot from './LineDot';
 
-export default function Section({ title, children, className = '', animatedLine = false }) {
+export default function Section({ title, children, className = '' }) {
   return (
     <section className={`py-10 sm:py-12 ${className}`}>
       <div className="flex items-center gap-3 mb-6">
