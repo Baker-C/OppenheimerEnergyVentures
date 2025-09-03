@@ -1,3 +1,5 @@
 *.psd
 *.zip
 *.exe
+
+./project-requirements.txt

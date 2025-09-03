@@ -28,7 +28,7 @@ export default function Information() {
             ))}
           </div>
         </Section> */}
-        <Section title="Team" animatedLine className="mt-16">
+        <Section title="Leaders" animatedLine className="mt-16">
           <div className="fade-up" style={{ animationDelay: '420ms' }}>
             <PeopleList people={team} />
           </div>

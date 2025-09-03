@@ -132,25 +132,32 @@ export default function Home() {
 
   return (
     <main>
-    <div className="w-full bg-white shadow-bottom-over relative z-10 h-0" />
+    <div className="w-full bg-white relative z-10 h-0" />
       {/* <div ref={bgRef} className="bg-secondary shadow-bottom-hard relative z-0 transition-colors">
         <div className="max-w-[1400px] mx-auto">
           <HeroVideo onFirstPlayStart={handleFirstPlayStart} revealTitle={revealHeroTitle} />
         </div>
       </div> */}
-        <div className="w-full bg-white shadow-top-over relative z-10">
+        <div className="w-full bg-white shadow-top-over relative z-10 max-w-[1250px] mx-auto px-10">
           <div className="mx-auto 
           pt-20 pb-14
           xsm:pt-28 xsm:pb-20
           sm:pt-36 sm:pb-32
           md:pt-44 md:pb-36
           lg:pt-44 lg:pb-48
-          xl:pt-44 xl:pb-48"
+          xl:pt-44 xl:pb-48
+          fade-up shiny-once
+          px-4
+          "
           style={{animationDelay: "100ms"}}>
-            <HeroTitle />
+            <img 
+              src='/vectors/Single_Line_Full_Title.png' 
+              alt="OPPENHEIMER ENERGY" 
+              className="mx-auto"
+            />
           </div>
-          <div className="max-w-[1200px] mx-auto px-4">
-            <div ref={contentRef} className="space-y-16 sm:space-y-18 px-6 lg:px-0">
+          <div className="mx-auto">
+            <div ref={contentRef} className="space-y-16 sm:space-y-18">
               {home.intro.quote && (
                 <div className="space-y-5">
                   <p data-copy-idx={-2} className={`fade-up text-center italic text-gray-600 text-lg sm:text-xl md:text-2xl max-w-4xl mx-auto`} style={{ animationDelay: `${(visibleCopyAtLoad[-2] ? 1200 : 0)}ms` }}>
@@ -174,7 +181,7 @@ export default function Home() {
                  <p
                    key={idx}
                    data-copy-idx={idx}
-                   className={`fade-up justify-edge text-lg sm:text-xl md:text-2xl leading-8 text-charcoal pt-4`}
+                   className={`fade-up text-left text-lg sm:text-xl md:text-2xl leading-8 text-charcoal py-4`}
                    style={{ animationDelay: `${(visibleCopyAtLoad[idx] ? 2900 : 300) + idx * 180}ms` }}
                  >
                    {line}

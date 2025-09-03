@@ -210,83 +210,52 @@
     .in-view.line-dot-animate::before { animation: none; }
   }
 
-  /* Center-starting line-dot: two dots shoot out left and right */
-.line-dot-center-animate {
-  --dot-size: 10px;
+
+
+
+/* One-time left→right shine sweep */
+.shiny-once {
   position: relative;
-  height: 6px;
+  overflow: hidden;        /* keeps the flare inside the image bounds */
 }
-.line-dot-center-animate i {
-  display: block;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  width: 0;
-  height: 1px;
-  background: currentColor;
-}
-.line-dot-center-animate i::before,
-.line-dot-center-animate i::after {
+
+/* The moving flare */
+.shiny-once::after {
   content: "";
   position: absolute;
-  top: 50%;
-  width: var(--dot-size);
-  height: var(--dot-size);
-  background: currentColor;
-  border-radius: 9999px;
-  transform: translateY(-50%) scale(0.8);
-}
-/* left dot */
-.line-dot-center-animate i::before {
-  left: calc(50% - var(--dot-size) / 2);
-}
-/* right dot */
-.line-dot-center-animate i::after {
-  left: calc(50% - var(--dot-size) / 2);
+  top: 0;
+  bottom: 0;
+  left: -65%;
+  width: 35%;
+  pointer-events: none;
+
+  /* bright slanted flare */
+  background: linear-gradient(
+    115deg,
+    rgba(255,255,255,0) 0%,
+    rgba(255,255,255,0.12) 45%,
+    rgba(255,255,255,0.65) 50%,
+    rgba(255,255,255,0.12) 55%,
+    rgba(255,255,255,0) 100%
+  );
+  transform: skewX(-18deg);
+  mix-blend-mode: screen;  /* nice metallic pop over dark areas */
+  filter: blur(0.5px);
+
+  /* runs once, then stays off-canvas */
+  animation: shiny-sweep 2s ease-out 0.6s 1 forwards;
 }
 
-/* animations: lines expand left and right, dots shoot out */
-@keyframes center-line-expand-left {
-  0% { width: 0; left: 50%; }
-  100% { width: 50%; left: 0; }
-}
-@keyframes center-line-expand-right {
-  0% { width: 0; left: 50%; }
-  100% { width: 50%; left: 50%; }
-}
-@keyframes center-dot-shoot-left {
-  0% { transform: translateY(-50%) translateX(0) scale(0.8); }
-  100% { transform: translateY(-50%) translateX(-100%) scale(1); }
-}
-@keyframes center-dot-shoot-right {
-  0% { transform: translateY(-50%) translateX(0) scale(0.8); }
-  100% { transform: translateY(-50%) translateX(100%) scale(1); }
+@keyframes shiny-sweep {
+  to { left: 120%; }
 }
 
-/* in-view trigger to run animations similar timing to LineDot */
-.in-view.line-dot-center-animate i {
-  animation: center-line-expand-left 900ms cubic-bezier(.22,.61,.36,1) 300ms forwards,
-            center-line-expand-right 900ms cubic-bezier(.22,.61,.36,1) 300ms forwards;
-}
-.in-view.line-dot-center-animate i::before {
-  animation: center-dot-shoot-left 900ms cubic-bezier(.22,.61,.36,1) 300ms forwards;
-}
-.in-view.line-dot-center-animate i::after {
-  animation: center-dot-shoot-right 900ms cubic-bezier(.22,.61,.36,1) 300ms forwards;
-}
+/* Accessibility: respect users who prefer less motion */
 @media (prefers-reduced-motion: reduce) {
-  .in-view.line-dot-center-animate i,
-  .in-view.line-dot-center-animate i::before,
-  .in-view.line-dot-center-animate i::after {
-    animation: none;
-    width: 100%;
-    left: 0;
-    transform: translateY(-50%) translateX(0) scale(1);
-  }
-}
+  .shiny-once::after { animation: none; }
 }
 
+}
 /* CustomCursor.css */
 .custom-cursor {
   position: fixed;
