@@ -4,6 +4,7 @@ module.exports = {
     "./public/index.html",
     "./src/**/*.{js,jsx,ts,tsx}"
   ],
+  darkMode: 'class',
   theme: {
     extend: {
       screens: {
@@ -24,14 +25,15 @@ module.exports = {
         bold: 700,
       },
       colors: {
-        primary: {
-          DEFAULT: "#1a1a1a", // deep charcoal
-          muted: "#4a4a4a"
-        },
-  // Updated secondary background color
-  secondary: "#EEEEEE",
-        accent: "#1a9",
-        charcoal: "#1a1a1a"
+        white: "var(--color-white)",
+        black: "var(--color-black)",
+        "white-muted": "var(--color-white-muted)",
+        "black-muted": "var(--color-black-muted)",
+        accent: "var(--color-accent)",
+        "black-shadow": "var(--color-black-shadow)",
+        "white-shadow": "var(--color-white-shadow)",
+        "black-shadow-rgb": "var(--color-black-shadow-rgb)",
+        "white-shadow-rgb": "var(--color-white-shadow-rgb)",
       },
     },
   },

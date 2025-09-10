@@ -1,6 +1,22 @@
 [
-  { "name": "Charles Oppenheimer", "role": "Founder" },
-  { "name": "Duane Olcsvary", "role": "Nuclear" },
-  { "name": "Hunter Dare", "role": "Finance" },
-  { "name": "Ryan Pickering", "role": "Development" }
+  {
+    "name": "Charles Oppenheimer",
+    "role": "Founder & CEO",
+    "bio": "Technology entrepreneur and grandson of J. Robert Oppenheimer, Charles leads OE’s vision to scale nuclear energy for America’s future"
+  },
+  {
+    "name": "Duane Olcsvary",
+    "role": "Head of Nuclear Projects",
+    "bio": "Veteran nuclear executive with decades of utility experience delivering complex projects"
+  },
+  {
+    "name": "Hunter Dare",
+    "role": "Head of Finance & Capital Markets",
+    "bio": "Energy finance professional specializing in infrastructure investment and risk management"
+  },
+  {
+    "name": "Ryan Pickering",
+    "role": "Head of Development & Partnerships",
+    "bio": "Project developer with experience in energy policy, corporate partnerships and utility engagement"
+  }
 ]

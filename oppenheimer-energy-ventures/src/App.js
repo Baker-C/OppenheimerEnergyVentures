@@ -6,7 +6,7 @@ import Information from './pages/Information';
 import Footer from './components/Footer';
 import CustomCursor from './components/CustomCursor';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 function ObserverWrapper({ children }) {
   const location = useLocation();
@@ -38,12 +38,12 @@ function ObserverWrapper({ children }) {
   return children;
 }
 
-function App() {
+const App = () => {
   return (
     <BrowserRouter>
       <ObserverWrapper>
         <CustomCursor />
-        <div className="min-h-screen bg-white text-primary flex flex-col cursor-none">
+        <div className="min-h-screen flex flex-col cursor-none">
           <Nav />
           <div className="flex-1">
             <Routes>

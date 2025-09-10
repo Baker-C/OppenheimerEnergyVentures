@@ -6,8 +6,21 @@
 /* Global base styles */
 @layer base {
   html { scroll-behavior: smooth; }
-  body { @apply bg-white text-charcoal font-sans; }
-  a { @apply text-primary hover:text-accent focus:outline-none focus:ring-2 focus:ring-accent/40 rounded-sm; }
+  body { @apply font-sans bg-white dark:bg-black text-black dark:text-white; }
+  a { @apply hover:text-accent focus:outline-none focus:ring-2 focus:ring-accent rounded-sm; }
+
+  /* Light theme (default) */
+  :root {
+    --color-black: #050505;
+    --color-black-muted: #1a1a1a;
+    --color-white: #fff;
+    --color-white-muted: #EEEEEE;
+    --color-accent: #1a9;
+    --color-black-shadow: #1a1a1a;
+    --color-white-shadow: #fff;
+    --color-shadow-rgb: 26, 26, 26;
+    --color-white-shadow-rgb: 255, 255, 255;
+  }
 }
 
 /* Heading font utility (Rubik) */
@@ -34,55 +47,25 @@
   /* Slight top-only shadow */
   .shadow-top-sm {
     /* slightly darker and longer by ~1px */
-    box-shadow: 0 -1px 3px 0 rgb(0 0 0 / 0.08);
+    --tw-shadow-rgb: theme('colors.shadowRgb');
+    box-shadow: 0 -1px 3px 0 rgba(var(--tw-shadow-rgb), 0.08);
   }
     /* Harsher shadows */
     .shadow-bottom-hard {
-      box-shadow: 0 4px 12px -2px rgb(0 0 0 / 0.12), 0 10px 20px -10px rgb(0 0 0 / 0.12);
+      --tw-shadow-rgb: theme('colors.shadowRgb');
+      box-shadow: 0 4px 12px -2px rgba(var(--tw-shadow-rgb), 0.12), 0 10px 20px -10px rgba(var(--tw-shadow-rgb), 0.12);
     }
     .shadow-top-hard {
-      box-shadow: 0 -4px 12px -2px rgb(0 0 0 / 0.25), 0 -10px 20px -10px rgb(0 0 0 / 0.25);
+      --tw-shadow-rgb: theme('colors.shadowRgb');
+      box-shadow: 0 -4px 12px -2px rgba(var(--tw-shadow-rgb), 0.25), 0 -10px 20px -10px rgba(var(--tw-shadow-rgb), 0.25);
     }
     /* Medium top shadow between sm and hard */
     .shadow-top-md {
-      box-shadow: 0 -3px 8px -2px rgb(0 0 0 / 0.16), 0 -6px 14px -8px rgb(0 0 0 / 0.16);
+      --tw-shadow-rgb: theme('colors.shadowRgb');
+      box-shadow: 0 -3px 8px -2px rgba(var(--tw-shadow-rgb), 0.16), 0 -6px 14px -8px rgba(var(--tw-shadow-rgb), 0.16);
     }
-    /* Overlapping top shadow that casts over previous section */
-    .shadow-top-over {
-      position: relative;
-    }
-  .shadow-top-over::before {
-      content: "";
-      position: absolute;
-      top: -24px;
-      left: 0;
-      right: 0;
-      height: 24px;
-      pointer-events: none;
-      background: linear-gradient(to top,
-        rgb(0 0 0 / 0.12),
-        rgb(0 0 0 / 0.06) 35%,
-        transparent
-      );
-    }
-    /* Overlapping bottom shadow that casts over following section */
-    .shadow-bottom-over {
-      position: relative;
-    }
-    .shadow-bottom-over::after {
-      content: "";
-      position: absolute;
-      bottom: -24px;
-      left: 0;
-      right: 0;
-      height: 24px;
-      pointer-events: none;
-      background: linear-gradient(to bottom,
-        rgb(0 0 0 / 0.12),
-        rgb(0 0 0 / 0.06) 35%,
-        transparent
-      );
-    }
+
+
   /* Delayed fade-in utility */
   @keyframes tw-fade-in {
     from { opacity: 0; }
@@ -100,11 +83,34 @@
   .letter-fade {
     opacity: 0;
     display: inline-block;
-  animation: letter-fade 700ms ease-out forwards;
+    animation: letter-fade 700ms ease-out forwards;
   }
   /* Vertical-only shadow utility (no lateral spread perception) */
   .shadow-y {
     box-shadow: 0 8px 16px -12px rgb(0 0 0 / 0.25);
+  }
+  /* Vertical-only white glow utility */
+  .glow-y {
+    box-shadow: 0 8px 16px -12px rgb(255 255 255 / 0.25);
+  }
+
+  .shadow-basic {
+    box-shadow: 0 0 12px -2px rgb(0 0 0 / 0.12), 0 10px 20px -10px rgb(0 0 0 / 0.12);
+  }
+
+  .shadow-basic:hover {
+    box-shadow: 0 0 18px -2px rgb(0 0 0 / 0.25), 0 10px 30px -10px rgb(0 0 0 / 0.25);
+    transition-duration: 200ms;
+  }
+
+  .glow-basic {
+    box-shadow: 0 0 12px -2px rgb(255 255 255 / 0.12), 0 10px 20px -10px rgb(255 255 255 / 0.12);
+    transition-duration: 200ms;
+  }
+
+  .glow-basic:hover {
+    box-shadow: 0 0 18px -2px rgb(255 255 255 / 0.25), 0 10px 30px -10px rgb(255 255 255 / 0.25);
+    border-color: #fff;
   }
   /* Force arrow cursor (suppress text I-beam) for nested text */
   .cursor-default-all, .cursor-default-all * { cursor: default !important; }
@@ -271,4 +277,25 @@
 
 .custom-cursor.clicked {
   transform: translate(-50%, -50%) scale(.7); /* Scale effect remains */
+}
+
+@layer utilities {
+  /* ...existing code... */
+  .spin-fade-out {
+    animation: spin-fade-out 700ms cubic-bezier(.22,.61,.36,1) forwards;
+  }
+  .spin-fade-in {
+    animation: spin-fade-in 700ms cubic-bezier(.22,.61,.36,1) forwards;
+  }
+}
+
+@keyframes spin-fade-out {
+  0% { opacity: 1; transform: rotate(0deg); }
+  80% { opacity: 0.2; transform: rotate(340deg); }
+  100% { opacity: 0; transform: rotate(360deg); }
+}
+@keyframes spin-fade-in {
+  0% { opacity: 0; transform: rotate(0deg); }
+  20% { opacity: 0.2; transform: rotate(20deg); }
+  100% { opacity: 1; transform: rotate(360deg); }
 }

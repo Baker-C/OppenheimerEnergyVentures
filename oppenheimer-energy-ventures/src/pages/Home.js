@@ -132,13 +132,13 @@ export default function Home() {
 
   return (
     <main>
-    <div className="w-full bg-white relative z-10 h-0" />
-      {/* <div ref={bgRef} className="bg-secondary shadow-bottom-hard relative z-0 transition-colors">
+    <div className="w-full relative z-10 h-0" />
+      {/* <div ref={bgRef} className="shadow-bottom-hard relative z-0 transition-colors">
         <div className="max-w-[1400px] mx-auto">
           <HeroVideo onFirstPlayStart={handleFirstPlayStart} revealTitle={revealHeroTitle} />
         </div>
       </div> */}
-        <div className="w-full bg-white shadow-top-over relative z-10 max-w-[1250px] mx-auto px-10">
+        <div className="w-full relative z-10 max-w-[1250px] mx-auto px-10">
           <div className="mx-auto 
           pt-20 pb-14
           xsm:pt-28 xsm:pb-20
@@ -151,7 +151,7 @@ export default function Home() {
           "
           style={{animationDelay: "100ms"}}>
             <img 
-              src='/vectors/Single_Line_Full_Title.png' 
+              src='/vectors/Logo_With_Words.png' 
               alt="OPPENHEIMER ENERGY" 
               className="mx-auto"
             />
@@ -160,11 +160,11 @@ export default function Home() {
             <div ref={contentRef} className="space-y-16 sm:space-y-18">
               {home.intro.quote && (
                 <div className="space-y-5">
-                  <p data-copy-idx={-2} className={`fade-up text-center italic text-gray-600 text-lg sm:text-xl md:text-2xl max-w-4xl mx-auto`} style={{ animationDelay: `${(visibleCopyAtLoad[-2] ? 1200 : 0)}ms` }}>
+                  <p data-copy-idx={-2} className={`fade-up text-center italic text-lg sm:text-xl md:text-2xl max-w-4xl mx-auto`} style={{ animationDelay: `${(visibleCopyAtLoad[-2] ? 1200 : 0)}ms` }}>
                     “{home.intro.quote.text}”
                   </p>
                   {home.intro.quote.author && (
-                    <p data-copy-idx={-1} className={`fade-up text-center italic text-lg sm:text-xl md:text-2xl text-gray-400 max-w-2xl mx-auto`} style={{ animationDelay: `${(visibleCopyAtLoad[-1] ? 1400 : 0)}ms` }}>
+                    <p data-copy-idx={-1} className={`fade-up text-center italic text-lg sm:text-xl md:text-2xl text-black-muted dark:text-white-muted max-w-2xl mx-auto`} style={{ animationDelay: `${(visibleCopyAtLoad[-1] ? 1400 : 0)}ms` }}>
                       — {home.intro.quote.author}
                     </p>
                   )}
