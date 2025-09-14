@@ -8,8 +8,8 @@ export default function PeopleList({ people = [] }) {
           cursor-none fade-up
         " style={{ animationDelay: `${420 + idx * 120}ms` }}>
           <div className="text-lg sm:text-xl md:text-2xl font-semibold">{p.name}</div>
-          {p.role && <div className="text-xs sm:text-base md:text-lg text-black-muted dark:text-white-muted">{p.role}</div>}
-          {p.bio && <p className="mt-4 text-xs sm:text-base md:text-lg italic text-black-muted dark:text-white-muted leading-7">{p.bio}</p>}
+          {p.role && <div className="text-xs sm:text-base md:text-lg font-subheading text-black-muted dark:text-white-muted">{p.role}</div>}
+          {p.bio && <p className="mt-4 text-xs sm:text-base md:text-lg text-black-muted dark:text-white-muted leading-7">{p.bio}</p>}
         </li>
       ))}
     </ul>

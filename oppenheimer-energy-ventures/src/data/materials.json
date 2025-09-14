@@ -1,11 +1,13 @@
 {
   "subtitle": "Download our latest strategic briefs and reference documents.",
   "items": [
-    { "name": "Letter: Charles Oppenheimer 2025", "href": "/downloads/oppenheimer-letter-2025.pdf" },
-    { "name": "Audio: “The Nuclear Finance Show” Podcast: Charles Oppenheimer - Founder and CEO", "href": "/downloads/nuclear-finance-show-charles-oppenheimer.mp3" },
-    { "name": "Audio: “How to Build Big Things” Podcast Discussion: Duane Olcsvary, Director of Nuclear", "href": "/downloads/how-to-build-big-things-duane-olcsvary.mp3" },
-    { "name": "Whitepaper for Supporters: Accelerating Gigawatt-Scale Deployment", "href": "/downloads/whitepaper-supporters-gigawatt.pdf" },
-    { "name": "Whitepaper for Utilities: Our Nuclear Development Model", "href": "/downloads/whitepaper-utilities-nuclear-model.pdf" },
-    { "name": "Department of Energy: Potential Cost Reduction in New Nuclear Deployments Based on Recent AP1000 Experience", "href": "/downloads/doe-cost-reduction.pdf" }
+    {
+      "name": "Letter: Charles Oppenheimer 2025",
+      "href": "/downloads/oppenheimer-letter-2025.pdf"
+    },
+    {
+      "name": "Reduction in New Nuclear Deployments Based on Recent AP1000 Experience",
+      "href": "/downloads/reduction-in-new-nuclear-deployments-based-on-recent-ap1000-experience.pdf"
+    }
   ]
 }

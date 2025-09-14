@@ -29,16 +29,16 @@ export default function ThemeToggle() {
     <button
       type="button"
       aria-label="Toggle theme"
-      className="absolute right-2 top-1/2 -translate-y-1/2 w-12 h-12 flex items-center justify-center rounded-full overflow-hidden shadow-basic dark:glow-basic"
+      className="hover:cursor-none absolute right-10 top-1/2 -translate-y-1/2 w-8 h-8 flex items-center justify-center rounded-full overflow-hidden shadow-basic dark:glow-basic"
       style={{ zIndex: 30 }}
       onClick={handleThemeClick}
     >
-      <span className="relative w-8 h-8 block">
+      <span className="relative w-6 h-6 block">
         {/* Light icon: visible in light, hidden in dark */}
         <img
           src="/Light_Mode.png"
           alt="Light mode"
-          className={`absolute inset-0 w-8 h-8 object-contain transition-opacity duration-700 block dark:hidden ${animating && !isDark ? 'spin-fade-in' : ''}`}
+          className={`absolute inset-0 w-6 h-6 object-contain transition-opacity duration-700 block dark:hidden ${animating && !isDark ? 'spin-fade-in' : ''}`}
           draggable="false"
           style={{ pointerEvents: 'none' }}
         />
@@ -46,7 +46,7 @@ export default function ThemeToggle() {
         <img
           src="/Dark_Mode.png"
           alt="Dark mode"
-          className={`absolute inset-0 w-8 h-8 object-contain transition-opacity duration-700 hidden dark:block ${animating && isDark ? 'spin-fade-in' : ''}`}
+          className={`absolute inset-0 w-6 h-6 object-contain transition-opacity duration-700 hidden dark:block ${animating && isDark ? 'spin-fade-in' : ''}`}
           draggable="false"
           style={{ pointerEvents: 'none' }}
         />

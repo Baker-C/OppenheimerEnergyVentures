@@ -34,7 +34,7 @@ const CustomCursor = () => {
 
   return (
     <div
-      className={`custom-cursor ${clicked ? 'clicked' : ''}`}
+      className={`custom-cursor ${clicked ? 'clicked' : ''} bg-black dark:bg-white`}
       style={{
         left: `${position.x}px`,
         top: `${position.y}px`,

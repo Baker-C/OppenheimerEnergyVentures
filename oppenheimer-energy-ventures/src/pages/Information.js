@@ -18,16 +18,6 @@ export default function Information() {
             ))}
           </div>
         </Section>
-        <Section title="Resources" animatedLine className="mt-16">
-          <p className="text-lg sm:text-xl md:text-2xl text-black-muted dark:text-white-muted mb-8 fade-up" style={{ animationDelay: '420ms' }}>{materials.subtitle}</p>
-          <div className="overflow-x-hidden pb-6">
-            {(materials.items || materials).map((m, i, arr) => (
-              <div key={i} className="fade-up" style={{ animationDelay: `${480 + i * 120}ms` }}>
-                <MaterialRow name={m.name} href={m.href} isLast={i === (arr.length - 1)} />
-              </div>
-            ))}
-          </div>
-        </Section>
         <Section title="Leaders" animatedLine className="mt-16">
           <div className="fade-up" style={{ animationDelay: '420ms' }}>
             <PeopleList people={team} />
@@ -36,6 +26,18 @@ export default function Information() {
         <Section title="Advisors & Investors" animatedLine className="mt-16">
           <div className="fade-up" style={{ animationDelay: '420ms' }}>
             <PeopleList people={advisors} />
+          </div>
+        </Section>
+        <Section title="Resources" animatedLine className="mt-16">
+          <p className="text-lg sm:text-xl md:text-2xl text-black-muted dark:text-white-muted mb-8 fade-up pb-8" style={{ animationDelay: '420ms' }}>
+            {materials.subtitle}
+          </p>
+          <div className="pb-6">
+            {(materials.items || materials).map((m, i, arr) => (
+              <div key={i} className="fade-up" style={{ animationDelay: `${480 + i * 120}ms` }}>
+                <MaterialRow name={m.name} href={m.href} isLast={i === (arr.length - 1)} />
+              </div>
+            ))}
           </div>
         </Section>
       </Container>

@@ -19,8 +19,8 @@ export default function Nav() {
           <NavLink to="/information" className={linkClass} onClick={handleClick}>Information</NavLink>
         </nav>
         {/* Theme toggle button */}
-        <ThemeToggle className="absolute right-4 top-1/2 -translate-y-1/2" />
       </div>
+        <ThemeToggle className="absolute right-8 top-1/2 -translate-y-1/2" />
     </header>
   );
 }

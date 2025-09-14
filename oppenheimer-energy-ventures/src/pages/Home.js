@@ -139,7 +139,8 @@ export default function Home() {
         </div>
       </div> */}
         <div className="w-full relative z-10 max-w-[1250px] mx-auto px-10">
-          <div className="mx-auto 
+          <div className="block dark:hidden
+          mx-auto 
           pt-20 pb-14
           xsm:pt-28 xsm:pb-20
           sm:pt-36 sm:pb-32
@@ -150,10 +151,30 @@ export default function Home() {
           px-4
           "
           style={{animationDelay: "100ms"}}>
-            <img 
-              src='/vectors/Logo_With_Words.png' 
-              alt="OPPENHEIMER ENERGY" 
+            <img
+              src='/vectors/Logo_BLK.svg'
+              alt="OPPENHEIMER ENERGY"
               className="mx-auto"
+              onError={(e) => { e.currentTarget.onerror = null; e.currentTarget.src = '/vectors/Logo_BLK.png'; }}
+            />
+          </div>
+          <div className="hidden dark:block
+          mx-auto 
+          pt-20 pb-14
+          xsm:pt-28 xsm:pb-20
+          sm:pt-36 sm:pb-32
+          md:pt-44 md:pb-36
+          lg:pt-44 lg:pb-48
+          xl:pt-44 xl:pb-48
+          fade-up shadow-once
+          px-4
+          "
+          style={{animationDelay: "100ms"}}>
+            <img
+              src='/vectors/Logo_WHT.svg'
+              alt="OPPENHEIMER ENERGY"
+              className="mx-auto"
+              onError={(e) => { e.currentTarget.onerror = null; e.currentTarget.src = '/vectors/Logo_WHT.png'; }}
             />
           </div>
           <div className="mx-auto">
@@ -164,7 +185,7 @@ export default function Home() {
                     “{home.intro.quote.text}”
                   </p>
                   {home.intro.quote.author && (
-                    <p data-copy-idx={-1} className={`fade-up text-center italic text-lg sm:text-xl md:text-2xl text-black-muted dark:text-white-muted max-w-2xl mx-auto`} style={{ animationDelay: `${(visibleCopyAtLoad[-1] ? 1400 : 0)}ms` }}>
+                    <p data-copy-idx={-1} className={`fade-up font-subheading text-center italic text-lg sm:text-xl md:text-2xl text-black-muted dark:text-white-muted max-w-2xl mx-auto`} style={{ animationDelay: `${(visibleCopyAtLoad[-1] ? 1400 : 0)}ms` }}>
                       — {home.intro.quote.author}
                     </p>
                   )}

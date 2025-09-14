@@ -87,11 +87,36 @@
   }
   /* Vertical-only shadow utility (no lateral spread perception) */
   .shadow-y {
-    box-shadow: 0 8px 16px -12px rgb(0 0 0 / 0.25);
+    box-shadow: 0 8px 16px -16px rgb(0 0 0 / 0.65);
   }
-  /* Vertical-only white glow utility */
+  /* Vertical-only white glow utility: outer top & bottom glows (outside the box) */
   .glow-y {
-    box-shadow: 0 8px 16px -12px rgb(255 255 255 / 0.25);
+    --glow-size: 6px;
+    --glow-outer-color: rgba(255, 255, 255, 0.45);
+    position: relative;
+    overflow: visible; /* allow pseudo-element glows to render outside */
+    z-index: 0; /* stacking context for pseudo-elements; children elevated above the glow */
+  }
+  .glow-y::before,
+  .glow-y::after {
+    content: "";
+    pointer-events: none;
+    position: absolute;
+    left: -3px; /* inset slightly to avoid side bleed */
+    right: -3px;
+    z-index: 0; /* behind content */
+    filter: blur(5px);
+  }
+  /* place the pseudo-elements completely outside the element so they don't overlap */
+  .glow-y::before {
+    height: var(--glow-size);
+    bottom: calc(-1.2 * var(--glow-size));
+    background: linear-gradient(to bottom, var(--glow-outer-color), transparent);
+  }
+  .glow-y::after {
+    height: var(--glow-size);
+    top: calc(-1.2 * var(--glow-size));
+    background: linear-gradient(to top, var(--glow-outer-color), transparent);
   }
 
   .shadow-basic {
@@ -261,7 +286,65 @@
   .shiny-once::after { animation: none; }
 }
 
+/* One-time SHADOW sweep (tilted linear gradient, 300% wide) */
+.shadow-once {
+  position: relative;
+  overflow: hidden;   /* keep effect inside */
+  isolation: isolate; /* contain blend to this element */
 }
+
+/* Big tilted band that starts covering everything, then sweeps away */
+.shadow-once::after {
+  content: "";
+  position: absolute;
+  /* extra height so the tilt never clips at top/bottom */
+  top: -25%;
+  bottom: -25%;
+  left: 50%;
+  width: 300%;                /* hard size */
+  pointer-events: none;
+  z-index: 1;
+
+  /* tilted dark band with soft edges */
+  background: linear-gradient(
+    var(--shadow-angle, 112deg),
+    rgba(0,0,0,0) 0%,
+    rgba(0,0,0,0.18) 38%,
+    rgba(0,0,0,0.25) 50%,
+    rgba(0,0,0,0.40) 62%,
+    rgba(0,0,0,0) 100%
+  );
+  filter: blur(var(--shadow-blur, 8px));
+  mix-blend-mode: multiply;
+  transform: translateX(-50%);  /* center the 300% band over the element */
+  opacity: var(--shadow-opacity, 1);
+
+  /* default: sweep RIGHT → LEFT, end fully off the LEFT edge */
+  animation: shadow-sweep-rtl var(--shadow-duration, 2.2s) ease-out 1.2s 1 forwards;
+  will-change: left;
+}
+
+@keyframes shadow-sweep-rtl {
+  /* with width:300% and translateX(-50%), <= -150% pushes fully off left; use a bit extra */
+  to { left: -360%; }
+}
+
+/* OPTIONAL: add .ltr to end off the RIGHT edge instead */
+.shadow-once.ltr::after { animation-name: shadow-sweep-ltr; }
+@keyframes shadow-sweep-ltr {
+  /* >= 250% pushes fully off right; add a little extra */
+  to { left: 260%; }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .shadow-once::after { animation: none; opacity: 0; }
+}
+}
+
+
+
+
 /* CustomCursor.css */
 .custom-cursor {
   position: fixed;
