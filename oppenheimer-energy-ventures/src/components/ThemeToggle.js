@@ -29,7 +29,7 @@ export default function ThemeToggle() {
     <button
       type="button"
       aria-label="Toggle theme"
-      className="hover:cursor-none absolute right-10 top-1/2 -translate-y-1/2 w-8 h-8 flex items-center justify-center rounded-full overflow-hidden shadow-basic dark:glow-basic"
+      className="hover:cursor-none absolute right-2 sm:right-4 md:right-6 lg:right-8 xl:right-10 top-1/2 -translate-y-1/2 w-8 h-8 flex items-center justify-center rounded-full overflow-hidden shadow-basic dark:glow-basic"
       style={{ zIndex: 30 }}
       onClick={handleThemeClick}
     >
