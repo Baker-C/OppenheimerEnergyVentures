@@ -7,6 +7,7 @@
 @layer base {
   html { scroll-behavior: smooth; }
   body { @apply font-sans bg-white dark:bg-black text-black dark:text-white; }
+  p { @apply text-black dark:text-white text-lg sm:text-xl md:text-2xl max-w-4xl; }
   a { @apply hover:text-accent focus:outline-none focus:ring-2 focus:ring-accent rounded-sm; }
 
   /* Light theme (default) */
@@ -20,6 +21,8 @@
     --color-white-shadow: #fff;
     --color-shadow-rgb: 26, 26, 26;
     --color-white-shadow-rgb: 255, 255, 255;
+    /* RGB form of the site's primary black so we can use rgba(var(--color-black-rgb), alpha) */
+    --color-black-rgb: 5, 5, 5;
   }
 }
 
@@ -307,14 +310,14 @@
 
   /* tilted dark band with soft edges */
   background: linear-gradient(
-    var(--shadow-angle, 112deg),
-    rgba(0,0,0,0) 0%,
-    rgba(0,0,0,0.18) 38%,
-    rgba(0,0,0,0.25) 50%,
-    rgba(0,0,0,0.40) 62%,
-    rgba(0,0,0,0) 100%
+    var(--shadow-angle, 145deg),
+    rgba(var(--color-black-rgb), 0) 0%,
+    rgba(var(--color-black-rgb), 0.18) 38%,
+    rgba(var(--color-black-rgb), 0.45) 50%,
+    rgba(var(--color-black-rgb), 0.60) 82%,
+    rgba(var(--color-black-rgb), 0) 100%
   );
-  filter: blur(var(--shadow-blur, 8px));
+  filter: blur(var(--shadow-blur, 2px));
   mix-blend-mode: multiply;
   transform: translateX(-50%);  /* center the 300% band over the element */
   opacity: var(--shadow-opacity, 1);

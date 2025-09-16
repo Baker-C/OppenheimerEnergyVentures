@@ -42,7 +42,7 @@ export default function LineDot({ width = '64px', className = '', ...props }) {
   return (
     <span
       ref={ref}
-      className={`inline-block h-[6px] relative line-dot-animate ${widthClass} ${className}`}
+      className={`inline-block h-[6px] relative line-dot-animate ${widthClass} text-black dark:text-white ${className}`}
       style={style}
       aria-hidden
       {...props}

@@ -19,6 +19,9 @@ export default function Home() {
   const [finished, setFinished] = useState(hasHeroVideoPlayed());
   const [showLineDot, setShowLineDot] = useState(false);
   const contentRef = useRef(null);
+  const locContainerRef = useRef(null);
+  const locRefs = useRef([]);
+  const sepRefs = useRef([]);
   const [contentVisibleAtLoad, setContentVisibleAtLoad] = useState(false);
   const [visibleCopyAtLoad, setVisibleCopyAtLoad] = useState({});
 
@@ -90,6 +93,63 @@ export default function Home() {
     return () => clearTimeout(t);
   }, []);
 
+  // Hide separator dots when the two adjacent items wrap to different lines.
+  useEffect(() => {
+    if (!locContainerRef.current || !locRefs.current.length) return;
+
+    let rafId = null;
+
+    const updateSeparators = () => {
+      // For each separator between idx and idx+1, show only if both items have same top offset.
+      for (let i = 0; i < sepRefs.current.length; i++) {
+        const left = locRefs.current[i];
+        const right = locRefs.current[i + 1];
+        const sep = sepRefs.current[i];
+        if (!left || !right || !sep) continue;
+        try {
+          const lRect = left.getBoundingClientRect();
+          const rRect = right.getBoundingClientRect();
+          // If tops are within 2px, consider them on same line.
+          const sameLine = Math.abs(lRect.top - rRect.top) <= 2;
+          // Use visibility instead of display to avoid reflow that may cause immediate rewrapping glitches.
+          sep.style.visibility = sameLine ? 'visible' : 'hidden';
+        } catch (e) {
+          // ignore measurement errors
+        }
+      }
+    };
+
+    const ro = new ResizeObserver(() => {
+      if (rafId) cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(updateSeparators);
+    });
+
+    ro.observe(locContainerRef.current);
+    // Also observe each location to catch line breaks caused by individual items.
+    locRefs.current.forEach((el) => el && ro.observe(el));
+
+    // Run once initially and after fonts load
+    rafId = requestAnimationFrame(updateSeparators);
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(() => {
+        if (rafId) cancelAnimationFrame(rafId);
+        rafId = requestAnimationFrame(updateSeparators);
+      }).catch(() => {});
+    }
+
+    const onWin = () => {
+      if (rafId) cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(updateSeparators);
+    };
+    window.addEventListener('resize', onWin);
+
+    return () => {
+      if (rafId) cancelAnimationFrame(rafId);
+      ro.disconnect();
+      window.removeEventListener('resize', onWin);
+    };
+  }, [home.locations]);
+
   // Check once on mount whether the main content block is visible in the viewport.
   useEffect(() => {
     const el = contentRef.current;
@@ -138,7 +198,7 @@ export default function Home() {
           <HeroVideo onFirstPlayStart={handleFirstPlayStart} revealTitle={revealHeroTitle} />
         </div>
       </div> */}
-        <div className="w-full relative z-10 max-w-[1250px] mx-auto px-10">
+        <div className="w-full relative z-10 max-w-[1050px] mx-auto px-10">
           <div className="block dark:hidden
           mx-auto 
           pt-20 pb-14
@@ -178,36 +238,83 @@ export default function Home() {
             />
           </div>
           <div className="mx-auto">
-            <div ref={contentRef} className="space-y-16 sm:space-y-18">
+            <div ref={contentRef} className="space-y-28 sm:space-y-32">
               {home.intro.quote && (
                 <div className="space-y-5">
-                  <p data-copy-idx={-2} className={`fade-up text-center italic text-lg sm:text-xl md:text-2xl max-w-4xl mx-auto`} style={{ animationDelay: `${(visibleCopyAtLoad[-2] ? 1200 : 0)}ms` }}>
+                  <p data-copy-idx={-2} className={`fade-up text-center italic mx-auto`} style={{ animationDelay: `${(visibleCopyAtLoad[-2] ? 1200 : 0)}ms` }}>
                     “{home.intro.quote.text}”
                   </p>
                   {home.intro.quote.author && (
-                    <p data-copy-idx={-1} className={`fade-up font-subheading text-center italic text-lg sm:text-xl md:text-2xl text-black-muted dark:text-white-muted max-w-2xl mx-auto`} style={{ animationDelay: `${(visibleCopyAtLoad[-1] ? 1400 : 0)}ms` }}>
+                    <p data-copy-idx={-1} className={`fade-up mx-6 ont-subheading text-center italic text-lg sm:text-xl md:text-2xl text-black-muted dark:text-white-muted max-w-2xl mx-auto`} style={{ animationDelay: `${(visibleCopyAtLoad[-1] ? 1400 : 0)}ms` }}>
                       — {home.intro.quote.author}
                     </p>
                   )}
                 </div>
               )}
-              <div className="min-h-[40px] flex items-center justify-center">
-                {showLineDot && (
-                  <div className={`flex items-center justify-center w-full`}>
-                    {showLineDot && <LineDot width="600px" />}
-                  </div>
-                )}
+                <div className="min-h-[40px] flex items-center justify-center">
+                  {showLineDot && (
+                    <div className={`flex items-center justify-center w-full`}>
+                      {showLineDot && <LineDot width="fill" />}
+                    </div>
+                  )}
+                </div>
+              <div className="space-y-5 text-left flex flex-col items-center w-fit mx-auto" style={{textWrap: 'normal', WebkitTextWrap: 'normal'}}>
+                {home.intro.copy && home.intro.copy.map((line, idx) => (
+                  <p
+                    key={idx}
+                    data-copy-idx={idx}
+                    className={`fade-up text-left w-full`}
+                    style={{ animationDelay: `${(visibleCopyAtLoad[idx] ? 2900 : 300) + idx * 180}ms`, textWrap: 'normal', WebkitTextWrap: 'normal' }}
+                  >
+                    {line}
+                  </p>
+                ))}
+                {home.contact.email && (
+                    <div
+                      data-copy-idx={2}
+                      className="pt-2 w-full flex items-center justify-start fade-up"
+                      style={{ animationDelay: `${(visibleCopyAtLoad[2] ? 2900 : 300) + (home.intro.copy ? home.intro.copy.length : 0) * 180}ms` }}
+                    >
+                      <p className="mr-4 flex-shrink-0">Contact us:</p>
+                      <p className="text-right break-words">
+                        {home.contact.email}
+                      </p>
+                    </div>
+                  )}
               </div>
-              {home.intro.copy && home.intro.copy.map((line, idx) => (
-                 <p
-                   key={idx}
-                   data-copy-idx={idx}
-                   className={`fade-up text-left text-lg sm:text-xl md:text-2xl leading-8 text-charcoal py-4`}
-                   style={{ animationDelay: `${(visibleCopyAtLoad[idx] ? 2900 : 300) + idx * 180}ms` }}
-                 >
-                   {line}
-                 </p>
-               ))}
+                  <div className="min-h-[40px] flex items-center justify-center">
+                    {showLineDot && (
+                      <div className={`flex items-center justify-center w-full`}>
+                        {showLineDot && <LineDot width="fill" />}
+                      </div>
+                    )}
+                  </div>
+                {home.locations.length > 0 && (
+                  <div
+                  ref={locContainerRef}
+                  data-copy-idx={3}
+                  className="flex flex-wrap items-center justify-center gap-y-2 fade-up font-subheading text-center italic text-lg sm:text-xl md:text-2xl text-black-muted dark:text-white-muted max-w-2xl mx-auto"
+                  style={{ animationDelay: `${(visibleCopyAtLoad[3] ? 3100 : 300) + ((home.intro.copy ? home.intro.copy.length : 0) + 1) * 180}ms` }}
+                  >
+                      {home.locations.map((loc, idx) => (
+                        <span key={idx} className="inline-flex items-center whitespace-nowrap">
+                          <p
+                            ref={(el) => { locRefs.current[idx] = el; }}
+                            className="font-subheading text-lg sm:text-xl md:text-2xl mx-6"
+                          >
+                            {loc}
+                          </p>
+                          {idx < home.locations.length - 1 && (
+                            <span
+                              ref={(el) => { sepRefs.current[idx] = el; }}
+                              aria-hidden="true"
+                              className="inline-block h-1 w-1 rounded-full bg-gray-300 dark:bg-gray-600"
+                            />
+                          )}
+                        </span>
+                      ))}
+                    </div>
+                  )}
             </div>
           </div>
         </div>

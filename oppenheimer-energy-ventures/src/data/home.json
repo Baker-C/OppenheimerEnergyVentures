@@ -11,5 +11,18 @@
   "title": [
     ["O", "P", "P", "E", "N", "H", "E", "I", "M", "E", "R"],
     ["E", "N", "E", "R", "G", "Y"]
+  ],
+  "contact": {
+    "email": "info@oppenheimer.energy"
+  },
+  "locations": [
+    "New York",
+    "Washington, D.C.",
+    "South Carolina",
+    "Wisconsin",
+    "Texas",
+    "Colorado",
+    "New Mexico",
+    "California"
   ]
 }
