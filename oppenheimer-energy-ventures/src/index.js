@@ -4,6 +4,12 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+// Ensure dark mode is the default. We use class-based darkMode in Tailwind (darkMode: 'class').
+// Add the `dark` class to the documentElement on startup so the initial render uses dark theme.
+if (typeof document !== 'undefined') {
+  document.documentElement.classList.add('dark');
+}
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
