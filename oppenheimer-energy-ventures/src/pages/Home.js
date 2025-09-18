@@ -247,7 +247,7 @@ export default function Home() {
                     “{home.intro.quote.text}”
                   </p>
                   {home.intro.quote.author && (
-                    <p data-copy-idx={-1} className={`fade-up mx-6 ont-subheading text-center italic text-lg sm:text-xl md:text-2xl text-black-muted dark:text-white-muted max-w-2xl mx-auto`} style={{ animationDelay: `${(visibleCopyAtLoad[-1] ? 1400 : 0)}ms` }}>
+                    <p data-copy-idx={-1} className={`fade-up mx-6 font-subheading text-center italic text-lg sm:text-xl md:text-2xl text-black-muted dark:text-white-muted max-w-2xl mx-auto`} style={{ animationDelay: `${(visibleCopyAtLoad[-1] ? 1400 : 0)}ms` }}>
                       — {home.intro.quote.author}
                     </p>
                   )}
