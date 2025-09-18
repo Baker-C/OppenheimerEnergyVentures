@@ -221,11 +221,11 @@ export default function Home() {
             </div>
             <div className="relative hidden dark:block w-full mx-auto">
               {/* Bottom image: white logo */}
-              <div className="reveal-base h-full w-full">
+              <div className="reveal-base w-full">
                 <img
                   src="/vectors/Logo_WHT.png"
                   alt="OPPENHEIMER ENERGY"
-                  className="h-full w-auto mx-auto"
+                  className="w-auto mx-auto"
                   onError={(e) => { e.currentTarget.onerror = null; }}
                 />
               </div>
