@@ -199,7 +199,7 @@ export default function Home() {
         </div>
       </div> */}
         <div className="w-full relative z-10 max-w-[1050px] mx-auto px-10">
-          <div className="block dark:hidden
+          <div className="
           mx-auto 
           pt-20 pb-14
           xsm:pt-28 xsm:pb-20
@@ -207,35 +207,37 @@ export default function Home() {
           md:pt-44 md:pb-36
           lg:pt-44 lg:pb-48
           xl:pt-44 xl:pb-48
-          fade-up shiny-once
+          fade-up
           px-4
           "
           style={{animationDelay: "100ms"}}>
-            <img
-              src='/vectors/Logo_BLK.svg'
-              alt="OPPENHEIMER ENERGY"
-              className="mx-auto"
-              onError={(e) => { e.currentTarget.onerror = null; e.currentTarget.src = '/vectors/Logo_BLK.png'; }}
-            />
-          </div>
-          <div className="hidden dark:block
-          mx-auto 
-          pt-20 pb-14
-          xsm:pt-28 xsm:pb-20
-          sm:pt-36 sm:pb-32
-          md:pt-44 md:pb-36
-          lg:pt-44 lg:pb-48
-          xl:pt-44 xl:pb-48
-          fade-up shadow-once
-          px-4
-          "
-          style={{animationDelay: "100ms"}}>
-            <img
-              src='/vectors/Logo_WHT.svg'
-              alt="OPPENHEIMER ENERGY"
-              className="mx-auto"
-              onError={(e) => { e.currentTarget.onerror = null; e.currentTarget.src = '/vectors/Logo_WHT.png'; }}
-            />
+            <div className="shiny-once  block dark:hidden">
+              <img
+                src='/vectors/Logo_BLK.svg'
+                alt="OPPENHEIMER ENERGY"
+                className="mx-auto"
+                onError={(e) => { e.currentTarget.onerror = null; e.currentTarget.src = '/vectors/Logo_BLK.png'; }}
+              />
+            </div>
+            <div className="relative hidden dark:block w-full mx-auto">
+              {/* Bottom image: white logo */}
+              <div className="reveal-base h-full w-full">
+                <img
+                  src="/vectors/Logo_WHT.png"
+                  alt="OPPENHEIMER ENERGY"
+                  className="h-full w-auto mx-auto"
+                  onError={(e) => { e.currentTarget.onerror = null; }}
+                />
+              </div>
+
+              {/* Top image: OFFWHT overlay now used as a background image so it scales by height */}
+              <div
+                className="glow-overlay glow-overlay-bg"
+                style={{ backgroundImage: `url('/vectors/Logo_WHTBLR.png')` }}
+                role="img"
+                aria-label="OPPENHEIMER ENERGY overlay"
+              />
+            </div>
           </div>
           <div className="mx-auto">
             <div ref={contentRef} className="space-y-28 sm:space-y-32">
@@ -254,7 +256,7 @@ export default function Home() {
                 <div className="min-h-[40px] flex items-center justify-center">
                   {showLineDot && (
                     <div className={`flex items-center justify-center w-full`}>
-                      {showLineDot && <LineDot width="fill" />}
+                      {showLineDot && <LineDot width="92%" />}
                     </div>
                   )}
                 </div>
@@ -269,52 +271,46 @@ export default function Home() {
                     {line}
                   </p>
                 ))}
-                {home.contact.email && (
+                <div className="space-y-5 flex flex-col items-start justify-start w-full" style={{textWrap: 'normal', WebkitTextWrap: 'normal'}}>
+                  {home.contact.email && (
                     <div
-                      data-copy-idx={2}
-                      className="pt-2 w-full flex items-center justify-start fade-up"
-                      style={{ animationDelay: `${(visibleCopyAtLoad[2] ? 2900 : 300) + (home.intro.copy ? home.intro.copy.length : 0) * 180}ms` }}
+                    data-copy-idx={2}
+                    className="w-fit flex items-center justify-center fade-up"
+                    style={{ animationDelay: `${(visibleCopyAtLoad[2] ? 2900 : 300) + (home.intro.copy ? home.intro.copy.length : 0) * 180}ms` }}
                     >
-                      <p className="mr-4 flex-shrink-0">Contact us:</p>
-                      <p className="text-right break-words">
-                        {home.contact.email}
-                      </p>
-                    </div>
-                  )}
-              </div>
-                  <div className="min-h-[40px] flex items-center justify-center">
-                    {showLineDot && (
-                      <div className={`flex items-center justify-center w-full`}>
-                        {showLineDot && <LineDot width="fill" />}
+                        <p className="break-words">
+                          {home.contact.email}
+                        </p>
                       </div>
                     )}
-                  </div>
-                {home.locations.length > 0 && (
-                  <div
-                  ref={locContainerRef}
-                  data-copy-idx={3}
-                  className="flex flex-wrap items-center justify-center gap-y-2 fade-up font-subheading text-center italic text-lg sm:text-xl md:text-2xl text-black-muted dark:text-white-muted max-w-2xl mx-auto"
-                  style={{ animationDelay: `${(visibleCopyAtLoad[3] ? 3100 : 300) + ((home.intro.copy ? home.intro.copy.length : 0) + 1) * 180}ms` }}
-                  >
+                  {home.locations.length > 0 && (
+                    <div
+                    ref={locContainerRef}
+                    data-copy-idx={3}
+                    className="flex flex-wrap items-center justify-start gap-y-2 fade-up text-start italic text-lg sm:text-xl md:text-2xl text-black-muted dark:text-white-muted max-w-2xl"
+                    style={{ animationDelay: `${(visibleCopyAtLoad[3] ? 3100 : 300) + ((home.intro.copy ? home.intro.copy.length : 0) + 1) * 180}ms` }}
+                    >
                       {home.locations.map((loc, idx) => (
                         <span key={idx} className="inline-flex items-center whitespace-nowrap">
                           <p
                             ref={(el) => { locRefs.current[idx] = el; }}
-                            className="font-subheading text-lg sm:text-xl md:text-2xl mx-6"
-                          >
+                            className="font-subheading text-lg sm:text-xl md:text-2xl"
+                            >
                             {loc}
                           </p>
                           {idx < home.locations.length - 1 && (
                             <span
-                              ref={(el) => { sepRefs.current[idx] = el; }}
-                              aria-hidden="true"
-                              className="inline-block h-1 w-1 rounded-full bg-gray-300 dark:bg-gray-600"
+                            ref={(el) => { sepRefs.current[idx] = el; }}
+                            aria-hidden="true"
+                            className="inline-block h-1 w-1 rounded-full bg-gray-300 dark:bg-gray-600"
                             />
                           )}
                         </span>
                       ))}
                     </div>
                   )}
+                </div>
+              </div>
             </div>
           </div>
         </div>

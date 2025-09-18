@@ -94,7 +94,7 @@
   }
   /* Vertical-only white glow utility: outer top & bottom glows (outside the box) */
   .glow-y {
-    --glow-size: 6px;
+    --glow-size: 3px;
     --glow-outer-color: rgba(255, 255, 255, 0.45);
     position: relative;
     overflow: visible; /* allow pseudo-element glows to render outside */
@@ -108,17 +108,17 @@
     left: -3px; /* inset slightly to avoid side bleed */
     right: -3px;
     z-index: 0; /* behind content */
-    filter: blur(5px);
+    filter: blur(4px);
   }
   /* place the pseudo-elements completely outside the element so they don't overlap */
   .glow-y::before {
     height: var(--glow-size);
-    bottom: calc(-1.2 * var(--glow-size));
+    bottom: calc(-1 * var(--glow-size));
     background: linear-gradient(to bottom, var(--glow-outer-color), transparent);
   }
   .glow-y::after {
     height: var(--glow-size);
-    top: calc(-1.2 * var(--glow-size));
+    top: calc(-1 * var(--glow-size));
     background: linear-gradient(to top, var(--glow-outer-color), transparent);
   }
 
@@ -244,7 +244,85 @@
     .in-view.line-dot-animate::before { animation: none; }
   }
 
+  /* Reveal overlay used for layered logos: shrinks from right->left to reveal underneath image */
+  .reveal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    overflow: hidden; /* clip horizontally while preserving image height */
+    pointer-events: none; /* decorative */
+    display: flex;
+    align-items: center; /* vertically center the overlay image */
+    justify-content: flex-start; /* align left so reveal looks natural */
+    /* start with no inset at bottom-right; animation (reveal-left) will animate this to trapezoid */
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    transition: clip-path 320ms ease-in; /* subtle transition if changed dynamically */
+  }
+  .reveal-overlay img { display: block; height: 100%; object-fit: contain; }
 
+  /* Background-image variant: scales by height (auto 100%) so aspect ratio is preserved
+     and the overlay's width animation simply clips the background horizontally. */
+  .reveal-overlay-bg {
+    background-repeat: no-repeat;
+    background-position: center left;
+    background-size: auto 100%;
+  }
+  
+  @keyframes reveal-left {
+    0% {
+      width: 100%;
+      clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+      -webkit-clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+      opacity: 1;
+    }
+    35% {
+      opacity: 1;
+    }
+    100% {
+      width: 0%;
+      clip-path: polygon(0 0, 100% 0, 30% 100%, 0 100%);
+      -webkit-clip-path: polygon(0 0, 100% 0, 30% 100%, 0 100%);
+      opacity: 0;
+    }
+  }
+  /* Triggered when an ancestor gains .in-view (matches the page's fade-up behaviour) */
+  .in-view .reveal-overlay {
+    animation: reveal-left 1200ms cubic-bezier(.22,.61,.36,1) 700ms forwards;
+  }
+  /* trapezoid clip-path is animated inside `reveal-left` keyframes so no separate hookup is needed */
+  .glow-overlay img { display: block; height: 100%; width: 100%; object-fit: fill; }
+
+  .glow-overlay {
+      position: absolute;
+      top: -3.8%;
+      left: -1%;
+      width: 108.3%;
+      height: 108.3%;
+      overflow: hidden; /* clip horizontally while preserving image height */
+      pointer-events: none; /* decorative */
+      display: flex;
+      opacity: 0;
+      align-items: center; /* vertically center the overlay image */
+    }
+
+    .glow-overlay-bg {
+      background-repeat: no-repeat;
+      background-position: center left;
+      background-size: auto 100%;
+    }
+  
+  
+    @keyframes glow-pulse {
+      0%, 100% { opacity: 0; }
+      10% { opacity: 1; }
+    }
+  
+    .in-view .glow-overlay {
+      animation: glow-pulse 800ms ease-in-out 50ms forwards;
+    }
 
 
 /* One-time left→right shine sweep */
@@ -303,7 +381,7 @@
   /* extra height so the tilt never clips at top/bottom */
   top: -25%;
   bottom: -25%;
-  left: 50%;
+  left: 100%;
   width: 300%;                /* hard size */
   pointer-events: none;
   z-index: 1;
@@ -311,16 +389,11 @@
   /* tilted dark band with soft edges */
   background: linear-gradient(
     var(--shadow-angle, 145deg),
-    rgba(var(--color-black-rgb), 0) 0%,
-    rgba(var(--color-black-rgb), 0.18) 38%,
-    rgba(var(--color-black-rgb), 0.45) 50%,
-    rgba(var(--color-black-rgb), 0.60) 82%,
-    rgba(var(--color-black-rgb), 0) 100%
+    rgba(var(--color-black-rgb), 0.45) 0%,
+    rgba(var(--color-black-rgb), 0.60) 45%,
+    rgba(var(--color-black-rgb), 0) 60%
   );
-  filter: blur(var(--shadow-blur, 2px));
-  mix-blend-mode: multiply;
   transform: translateX(-50%);  /* center the 300% band over the element */
-  opacity: var(--shadow-opacity, 1);
 
   /* default: sweep RIGHT → LEFT, end fully off the LEFT edge */
   animation: shadow-sweep-rtl var(--shadow-duration, 2.2s) ease-out 1.2s 1 forwards;
@@ -329,7 +402,7 @@
 
 @keyframes shadow-sweep-rtl {
   /* with width:300% and translateX(-50%), <= -150% pushes fully off left; use a bit extra */
-  to { left: -360%; }
+  to { left: -260%; }
 }
 
 /* OPTIONAL: add .ltr to end off the RIGHT edge instead */
