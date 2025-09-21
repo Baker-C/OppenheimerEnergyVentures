@@ -8,6 +8,7 @@ export default function Home() {
   const locContainerRef = useRef(null);
   const locRefs = useRef([]);
   const sepRefs = useRef([]);
+  const [contentVisibleAtLoad, setContentVisibleAtLoad] = useState(false);
   const [visibleCopyAtLoad, setVisibleCopyAtLoad] = useState({});
 
   useEffect(() => {

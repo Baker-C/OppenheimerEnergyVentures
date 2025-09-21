@@ -316,12 +316,16 @@
   
   
     @keyframes glow-pulse {
-      0%, 100% { opacity: 0; }
-      10% { opacity: 1; }
+      0%, 100% { 
+        opacity: 0;
+      }
+      10% { 
+        opacity: 1;
+      }
     }
   
     .in-view .glow-overlay {
-      animation: glow-pulse 800ms ease-in-out 50ms forwards;
+      animation: glow-pulse 800ms ease-in 60ms forwards;
     }
 
 

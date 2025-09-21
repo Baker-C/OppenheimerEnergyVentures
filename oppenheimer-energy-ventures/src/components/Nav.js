@@ -12,7 +12,7 @@ export default function Nav() {
   };
 
   return (
-    <header className="bg-white dark:bg-black shadow-sm shadow-gray-300/70 sticky top-0 inset-x-0 shadow-bottom-hard z-20">
+    <header className="bg-white dark:bg-black shadow-sm shadow-gray-300/70 sticky top-0 inset-x-0 z-20">
       <div className="max-w-5xl mx-auto flex items-center justify-center px-4 py-4 relative">
         <nav className="flex items-center gap-3">
           <NavLink to="/" className={linkClass} onClick={handleClick} end>Home</NavLink>
